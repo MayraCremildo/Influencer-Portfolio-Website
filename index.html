@@ -1,0 +1,3065 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mayra Cremildo — Criadora de Beleza, Cabelo &amp; Lifestyle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-white: #FFFFFF;
+      --bg-cream: #F5F2ED;
+      --bg-cream-modal: #F7F4EE;
+      --bg-card: #FAF8F5;
+      --bg-track: #EDE8E0;
+      --bg-combined: #F3EFE9;
+      --caramel: #785B45;
+      --terracotta: #845943;
+      --ink-dark: #2A1E17;
+      --ink-muted: #5C4E44;
+      --ink-soft: #85766B;
+      --border-light: #E5DFD5;
+      --border-card: #EAE4DA;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --container: 1160px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 86px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--ink-dark);
+      background-color: var(--bg-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    img, svg, video, iframe {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    @media (min-width: 640px) {
+      .container {
+        padding: 0 40px;
+      }
+    }
+
+    .eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 12px;
+    }
+
+    .serif-title {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -0.015em;
+      color: var(--ink-dark);
+    }
+
+    /* Barra de progresso de leitura */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2.5px;
+      width: 0%;
+      background-color: var(--terracotta);
+      z-index: 120;
+      transition: width 0.08s linear;
+    }
+
+    /* Animação de revelação suave */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==================== 1. CABEÇALHO ==================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background-color: rgba(255, 255, 255, 0.97);
+      border-bottom: 1px solid var(--border-light);
+      transition: box-shadow 0.25s ease;
+    }
+
+    .site-header.scrolled {
+      box-shadow: 0 6px 24px rgba(42, 30, 23, 0.045);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 82px;
+      gap: 18px;
+    }
+
+    .brand-logo {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--ink-dark);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 28px;
+    }
+
+    @media (min-width: 920px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-links a {
+      font-size: 13.5px;
+      font-weight: 400;
+      color: var(--ink-muted);
+      position: relative;
+      padding: 6px 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--ink-dark);
+      font-weight: 500;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background-color: var(--terracotta);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a.active::after,
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      background-color: var(--bg-cream);
+      border: 1px solid var(--border-light);
+      border-radius: 999px;
+      padding: 3px;
+    }
+
+    .lang-btn {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 5px 11px;
+      border-radius: 999px;
+      color: var(--ink-muted);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background-color: var(--ink-dark);
+      color: #FFFFFF;
+    }
+
+    .btn-header-cta {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--ink-dark);
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 11px 22px;
+      border-radius: 999px;
+      line-height: 1.25;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    @media (min-width: 640px) {
+      .btn-header-cta {
+        display: inline-flex;
+      }
+    }
+
+    .btn-header-cta:hover {
+      background-color: #3E2D23;
+      transform: translateY(-1px);
+    }
+
+    .mobile-menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      background-color: var(--bg-white);
+    }
+
+    @media (min-width: 920px) {
+      .mobile-menu-btn {
+        display: none;
+      }
+    }
+
+    .mobile-drawer {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px 24px 22px;
+      background-color: var(--bg-white);
+      border-bottom: 1px solid var(--border-light);
+      font-size: 14px;
+    }
+
+    .mobile-drawer.open {
+      display: flex;
+    }
+
+    /* ==================== 2. HERO ==================== */
+    .hero-section {
+      background-color: var(--bg-white);
+      padding: 48px 0 84px;
+    }
+
+    @media (min-width: 920px) {
+      .hero-section {
+        padding: 64px 0 92px;
+      }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    @media (min-width: 920px) {
+      .hero-grid {
+        grid-template-columns: 1.12fr 0.88fr;
+        gap: 56px;
+      }
+    }
+
+    .hero-title {
+      font-size: clamp(40px, 5vw, 62px);
+      margin-bottom: 16px;
+      max-width: 560px;
+    }
+
+    .hero-location {
+      font-size: 14.5px;
+      color: var(--ink-muted);
+      margin-bottom: 30px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--ink-dark);
+      color: #FFFFFF;
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 13px 26px;
+      border-radius: 999px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #3E2D23;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg-white);
+      color: var(--ink-dark);
+      border: 1px solid rgba(42, 30, 23, 0.32);
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 13px 26px;
+      border-radius: 999px;
+      transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--ink-dark);
+      background-color: var(--bg-card);
+      transform: translateY(-1px);
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 510px;
+    }
+
+    .metric-card {
+      border: 1px solid var(--border-card);
+      background-color: var(--bg-white);
+      border-radius: 14px;
+      padding: 16px 14px;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    @media (min-width: 640px) {
+      .metric-card {
+        padding: 18px 20px;
+      }
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      border-color: #D6CCC0;
+      box-shadow: 0 8px 20px rgba(42, 30, 23, 0.04);
+    }
+
+    .metric-value {
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 3vw, 35px);
+      font-weight: 500;
+      line-height: 1.08;
+      color: var(--ink-dark);
+      display: block;
+      margin-bottom: 5px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .hero-media {
+      border-radius: 16px;
+      overflow: hidden;
+      background-color: var(--caramel);
+      aspect-ratio: 4 / 4.6;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 920px) {
+      .hero-media {
+        margin: 0 0 0 auto;
+      }
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.6s ease;
+    }
+
+    .hero-media:hover img {
+      transform: scale(1.02);
+    }
+
+    /* ==================== 3. SOBRE ==================== */
+    .about-section {
+      background-color: var(--bg-cream);
+      padding: 84px 0;
+    }
+
+    @media (min-width: 920px) {
+      .about-section {
+        padding: 104px 0;
+      }
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (min-width: 920px) {
+      .about-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 60px;
+        align-items: start;
+      }
+    }
+
+    .about-lead {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 2.5vw, 31px);
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--ink-dark);
+      margin-bottom: 20px;
+    }
+
+    .about-body p {
+      font-size: 14.5px;
+      line-height: 1.72;
+      color: var(--ink-muted);
+      margin-bottom: 14px;
+    }
+
+    .about-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-portrait {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4 / 4.2;
+      background-color: #EAE4DA;
+      align-self: start;
+      margin-top: 0;
+    }
+
+    .about-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* ==================== 4 & 5. AUDIÊNCIA & DESEMPENHO ==================== */
+    .cream-band {
+      background-color: var(--bg-cream);
+      border-top: 1px solid var(--border-card);
+      padding: 80px 0;
+    }
+
+    @media (min-width: 920px) {
+      .cream-band {
+        padding: 96px 0;
+      }
+    }
+
+    .section-header {
+      max-width: 680px;
+      margin-bottom: 44px;
+    }
+
+    .section-title {
+      font-size: clamp(34px, 4.2vw, 50px);
+      margin-bottom: 14px;
+    }
+
+    .section-subtitle {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink-muted);
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    @media (min-width: 900px) {
+      .audience-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .data-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 28px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .data-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(42, 30, 23, 0.04);
+    }
+
+    .data-card-title {
+      font-family: var(--font-serif);
+      font-size: 27px;
+      font-weight: 400;
+      color: var(--ink-dark);
+      margin-bottom: 4px;
+    }
+
+    .data-card-meta {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 26px;
+    }
+
+    .donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding-top: 10px;
+    }
+
+    .donut-svg {
+      width: 124px;
+      height: 124px;
+      transform: rotate(-90deg);
+      flex-shrink: 0;
+    }
+
+    .donut-track {
+      fill: none;
+      stroke: var(--bg-track);
+      stroke-width: 13;
+    }
+
+    .donut-fill {
+      fill: none;
+      stroke: var(--terracotta);
+      stroke-width: 13;
+      stroke-linecap: butt;
+      stroke-dasharray: 289.03;
+      stroke-dashoffset: 289.03;
+      transition: stroke-dashoffset 1.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      color: var(--ink-dark);
+    }
+
+    .legend-left {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .bar-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .bar-row-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13.5px;
+      color: var(--ink-dark);
+      margin-bottom: 6px;
+    }
+
+    .bar-pct {
+      color: var(--ink-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .bar-track {
+      width: 100%;
+      height: 7px;
+      background-color: var(--bg-track);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--terracotta);
+      border-radius: 999px;
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Desempenho */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+      margin-bottom: 22px;
+    }
+
+    @media (min-width: 900px) {
+      .platform-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .platform-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .platform-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .platform-name {
+      font-family: var(--font-serif);
+      font-size: 31px;
+      font-weight: 400;
+      color: var(--ink-dark);
+    }
+
+    .platform-period {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .platform-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px 20px;
+    }
+
+    .plat-lbl {
+      font-size: 12.5px;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+    }
+
+    .plat-num {
+      font-family: var(--font-serif);
+      font-size: clamp(32px, 3.4vw, 40px);
+      font-weight: 500;
+      line-height: 1.05;
+      color: var(--ink-dark);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .card-foot {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-card);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .combined-box {
+      background-color: var(--bg-combined);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 24px 30px;
+    }
+
+    .footnote {
+      margin-top: 18px;
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+
+    /* ==================== 6. NICHOS & SERVIÇOS ==================== */
+    .niches-section {
+      position: relative;
+      background-color: var(--caramel);
+      padding-top: 60px;
+      overflow: hidden;
+    }
+
+    .niches-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 4vw, 44px);
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+
+    .niches-stage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 460px;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .niches-stage {
+        min-height: 530px;
+      }
+    }
+
+    .niches-portrait {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      height: 430px;
+      pointer-events: none;
+    }
+
+    @media (min-width: 768px) {
+      .niches-portrait {
+        height: 530px;
+      }
+    }
+
+    .niches-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      opacity: 0.94;
+    }
+
+    .niches-portrait::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--caramel) 0%, transparent 22%, transparent 78%, var(--caramel) 100%),
+                  linear-gradient(180deg, var(--caramel) 0%, transparent 18%);
+    }
+
+    .pills-stack {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 28px 0 42px;
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .pills-stack {
+        position: absolute;
+        left: 14%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: auto;
+        align-items: flex-start;
+        padding: 0;
+      }
+      .step-1 { transform: translateX(0); }
+      .step-2 { transform: translateX(-32px); }
+      .step-3 { transform: translateX(-24px); }
+      .step-4 { transform: translateX(-56px); }
+      .step-5 { transform: translateX(-40px); }
+    }
+
+    .niche-pill {
+      width: 215px;
+      padding: 13px 24px;
+      border-radius: 999px;
+      background-color: var(--bg-cream-modal);
+      color: var(--ink-dark);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-align: center;
+      box-shadow: 0 8px 22px rgba(31, 22, 17, 0.18);
+      transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .niche-pill:hover {
+      background-color: #FFFFFF;
+      scale: 1.04;
+      box-shadow: 0 12px 28px rgba(31, 22, 17, 0.25);
+    }
+
+    /* ==================== 7. PORTFÓLIO / TRABALHOS SELECIONADOS ==================== */
+    .port-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .back-niches-btn {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(42, 30, 23, 0.28);
+      background-color: var(--bg-card);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background-color 0.2s ease;
+    }
+
+    .back-niches-btn:hover {
+      background-color: var(--bg-white);
+    }
+
+    .back-niches-btn.visible {
+      display: inline-flex;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+
+    .filter-btn {
+      padding: 9px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border-card);
+      background-color: var(--bg-card);
+      color: var(--ink-muted);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: rgba(42, 30, 23, 0.45);
+      color: var(--ink-dark);
+    }
+
+    .filter-btn.active {
+      background-color: var(--ink-dark);
+      border-color: var(--ink-dark);
+      color: #FFFFFF;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px 20px;
+    }
+
+    @media (min-width: 560px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 960px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .work-card {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 6px;
+      margin: -6px;
+      border-radius: 18px;
+      border: 1px solid transparent;
+      transition: border-color 0.22s ease, background-color 0.22s ease, transform 0.22s ease;
+    }
+
+    .work-card:hover,
+    .work-card.selected {
+      border-color: var(--terracotta);
+      background-color: rgba(250, 248, 245, 0.72);
+    }
+
+    .work-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 14;
+      border-radius: 14px;
+      overflow: hidden;
+      background-color: #E5DFD5;
+    }
+
+    .work-thumb img,
+    .work-thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .work-card:hover .work-thumb img,
+    .work-card:hover .work-thumb video {
+      transform: scale(1.03);
+    }
+
+    .play-indicator {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: rgba(247, 244, 238, 0.9);
+      color: var(--ink-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(42, 30, 23, 0.18);
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .work-card.is-playing .play-indicator {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.88);
+    }
+
+    .campaign-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background-color: rgba(247, 244, 238, 0.95);
+      color: var(--ink-dark);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .work-info {
+      padding-top: 12px;
+    }
+
+    .work-brand {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    .work-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.22;
+      color: var(--ink-dark);
+      margin-top: 4px;
+    }
+
+    .work-views {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin-top: 4px;
+    }
+
+    /* ==================== 8. MARCAS PARCEIRAS ==================== */
+    .brands-section {
+      background-color: var(--bg-cream);
+      border-top: 1px solid var(--border-card);
+      padding: 84px 0 96px;
+    }
+
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 44px 24px;
+      align-items: center;
+      justify-items: center;
+      margin-top: 52px;
+    }
+
+    @media (min-width: 768px) {
+      .brands-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 56px 32px;
+      }
+    }
+
+    .brand-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      color: #6B625B;
+      opacity: 0.86;
+      transition: color 0.32s ease, opacity 0.32s ease, transform 0.28s ease;
+    }
+
+    .brand-item:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    .brand-item svg {
+      height: 54px;
+      width: auto;
+      max-width: 175px;
+    }
+
+    /* Cores oficiais reveladas no hover */
+    .brand-item .b-primary,
+    .brand-item .b-secondary,
+    .brand-item .b-accent {
+      fill: currentColor;
+      transition: fill 0.32s ease, stroke 0.32s ease;
+    }
+
+    .brand-item .b-stroke {
+      stroke: currentColor;
+      transition: stroke 0.32s ease, fill 0.32s ease;
+    }
+
+    .brand-sephora:hover { color: #111111; }
+    .brand-sephora:hover .b-accent { fill: #E31837; }
+
+    .brand-loreal:hover { color: #111111; }
+    .brand-loreal:hover .b-accent { fill: #C69C6D; }
+
+    .brand-kiko:hover { color: #1B1B1B; }
+    .brand-kiko:hover .b-accent { fill: #9E1B32; }
+
+    .brand-bodyshop:hover { color: #004236; }
+    .brand-bodyshop:hover .b-accent { fill: #C5A059; }
+
+    .brand-uriage:hover { color: #0066B2; }
+    .brand-uriage:hover .b-accent { fill: #009FE3; }
+
+    .brand-erborian:hover { color: #2B2B2B; }
+    .brand-erborian:hover .b-primary { fill: #C8102E; }
+    .brand-erborian:hover .b-accent { fill: #5E7E29; }
+
+    .brand-boticario:hover { color: #006F44; }
+    .brand-boticario:hover .b-accent { fill: #009B5A; }
+
+    .brand-dermage { color: #9E968F; }
+    .brand-dermage:hover { color: #7E4B8B; }
+    .brand-dermage:hover .b-accent { fill: #C86D9E; }
+
+    .brand-rituals:hover { color: #1E1C1A; }
+    .brand-rituals:hover .b-accent { fill: #B38E5D; }
+    .brand-rituals:hover .b-stroke { stroke: #B38E5D; }
+
+    .brand-primor:hover { color: #1A1A1A; }
+    .brand-primor:hover .b-accent { fill: #E2001A; }
+
+    .brand-morphe:hover { color: #0D0D0D; }
+    .brand-morphe:hover .b-accent { fill: #A6192E; }
+
+    .brand-lola:hover { color: #1F1F1F; }
+    .brand-lola:hover .b-primary { fill: #D81B60; }
+    .brand-lola:hover .b-stroke { stroke: #D81B60; }
+
+    /* ==================== 9. SERVIÇOS — COMO AS MARCAS TRABALHAM ==================== */
+    .formats-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 38px;
+    }
+
+    @media (min-width: 640px) {
+      .formats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 960px) {
+      .formats-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .format-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 28px 26px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .format-card:hover {
+      transform: translateY(-2px);
+      border-color: #D4C8BA;
+    }
+
+    .format-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--ink-dark);
+      margin-bottom: 10px;
+    }
+
+    .format-desc {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--ink-muted);
+    }
+
+    .formats-note {
+      margin-top: 34px;
+      padding-left: 14px;
+      border-left: 2px solid var(--terracotta);
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--ink-muted);
+    }
+
+    /* ==================== 10. CONTACTO ==================== */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      margin-top: 42px;
+      align-items: start;
+    }
+
+    @media (min-width: 920px) {
+      .contact-layout {
+        grid-template-columns: 0.72fr 1.28fr;
+        gap: 48px;
+      }
+    }
+
+    .contact-info-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 18px;
+      padding: 32px 28px;
+    }
+
+    .contact-block {
+      margin-bottom: 26px;
+    }
+
+    .contact-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+
+    .contact-email-link {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--ink-dark);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      word-break: break-all;
+    }
+
+    .contact-social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--ink-dark);
+    }
+
+    .contact-social-links a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      width: fit-content;
+    }
+
+    .contact-meta-foot {
+      margin-top: 28px;
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+
+    .contact-form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 640px) {
+      .form-row-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .field-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-dark);
+      margin-bottom: 8px;
+    }
+
+    .field-control {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 1px solid #E2DCD2;
+      background-color: #FCFBF9;
+      font-size: 14px;
+      color: var(--ink-dark);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .field-control:focus {
+      border-color: var(--caramel);
+      box-shadow: 0 0 0 3px rgba(120, 91, 69, 0.1);
+    }
+
+    select.field-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232A1E17' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    .submit-pill-btn {
+      width: fit-content;
+      padding: 14px 30px;
+      border-radius: 999px;
+      background-color: var(--ink-dark);
+      color: #FFFFFF;
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .submit-pill-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .form-feedback {
+      display: none;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--terracotta);
+      font-size: 13.5px;
+      color: var(--ink-dark);
+    }
+
+    .form-feedback.visible {
+      display: block;
+      animation: fadeUp 0.35s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==================== 11. RODAPÉ ==================== */
+    .footer {
+      background-color: var(--bg-cream);
+      border-top: 1px solid var(--border-light);
+      padding: 32px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+
+    @media (min-width: 640px) {
+      .footer-inner {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .footer-email {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: var(--ink-dark);
+    }
+
+    /* ==================== 12. MODAIS & VISTA EDITORIAL INDIVIDUAL ==================== */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background-color: rgba(42, 30, 23, 0.55);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 24px 60px rgba(42, 30, 23, 0.22);
+      animation: fadeUp 0.25s ease;
+    }
+
+    .modal-close-x {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border-card);
+      background-color: var(--bg-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .mk-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .mk-stat-box {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .mk-stat-num {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--ink-dark);
+    }
+
+    .mk-stat-lbl {
+      font-size: 11px;
+      color: var(--ink-soft);
+      margin-top: 2px;
+    }
+
+    /* Vista Editorial Individual (#F7F4EE) */
+    .detail-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 110;
+      background-color: var(--bg-cream-modal);
+      overflow-y: auto;
+      padding: 36px 24px 64px;
+    }
+
+    .detail-overlay.open {
+      display: block;
+    }
+
+    .detail-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      animation: fadeUp 0.28s ease;
+    }
+
+    .detail-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .detail-title {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 3.8vw, 40px);
+      font-weight: 500;
+      line-height: 1.12;
+      color: var(--ink-dark);
+      margin-top: 4px;
+    }
+
+    .detail-meta {
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin-top: 8px;
+    }
+
+    .detail-nav-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .nav-circle-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(42, 30, 23, 0.25);
+      background-color: var(--bg-card);
+      color: var(--ink-dark);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: background-color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav-circle-btn:hover {
+      background-color: var(--bg-white);
+      border-color: var(--ink-dark);
+    }
+
+    .pill-close {
+      padding: 9px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(42, 30, 23, 0.25);
+      background-color: var(--bg-card);
+      color: var(--ink-dark);
+      font-size: 13px;
+      font-weight: 500;
+      transition: background-color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .pill-close:hover {
+      background-color: var(--bg-white);
+      border-color: var(--ink-dark);
+    }
+
+    .detail-media {
+      width: 100%;
+      max-width: 680px;
+      aspect-ratio: 4 / 4.2;
+      border-radius: 18px;
+      overflow: hidden;
+      background-color: #E5DFD5;
+      margin-bottom: 22px;
+    }
+
+    .detail-media img,
+    .detail-media video,
+    .detail-media iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 0;
+    }
+
+    .detail-desc {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--ink-muted);
+      max-width: 680px;
+      margin-bottom: 26px;
+    }
+
+    .detail-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      max-width: 680px;
+    }
+
+    @media (min-width: 640px) {
+      .detail-stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .stat-card {
+      background-color: var(--bg-card);
+      border: 1px solid #E5DFD5;
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+
+    .stat-val {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.1;
+      color: var(--ink-dark);
+    }
+
+    .stat-lbl {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin-top: 6px;
+    }
+
+    .detail-foot {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .no-link-msg {
+      display: none;
+      font-size: 12.5px;
+      color: var(--caramel);
+    }
+
+    .no-link-msg.visible {
+      display: inline;
+    }
+
+    @media print {
+      body > *:not(#mediaKitModal) {
+        display: none !important;
+      }
+      #mediaKitModal {
+        position: static !important;
+        background: #FFF !important;
+        padding: 0 !important;
+      }
+      .modal-card {
+        box-shadow: none !important;
+        border: 1px solid #DDD !important;
+        max-width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de progresso de leitura -->
+  <div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ==================== 1. CABEÇALHO ==================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#inicio" class="brand-logo">Mayra Cremildo</a>
+
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#sobre" data-i18n="nav_about">Sobre</a>
+        <a href="#audiencia" data-i18n="nav_audience">Audiência</a>
+        <a href="#trabalhos" data-i18n="nav_works">Trabalhos</a>
+        <a href="#servicos" data-i18n="nav_services">Serviços</a>
+        <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-toggle" role="group" aria-label="Idioma">
+          <button type="button" id="lang-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
+          <button type="button" id="lang-pt" class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+        </div>
+
+        <a href="#contacto" class="btn-header-cta" data-i18n="nav_cta">Iniciar uma parceria</a>
+
+        <button type="button" id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Abrir menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileDrawer" class="mobile-drawer">
+      <a href="#sobre" data-i18n="nav_about">Sobre</a>
+      <a href="#audiencia" data-i18n="nav_audience">Audiência</a>
+      <a href="#trabalhos" data-i18n="nav_works">Trabalhos</a>
+      <a href="#servicos" data-i18n="nav_services">Serviços</a>
+      <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+      <a href="#contacto" style="font-weight:600; margin-top:4px;" data-i18n="nav_cta">Iniciar uma parceria →</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== 2. HERO ==================== -->
+    <section id="inicio" class="hero-section">
+      <div class="container hero-grid">
+        <div class="reveal in-view">
+          <span class="eyebrow" data-i18n="hero_eyebrow">CRIADORA DE BELEZA, CABELO &amp; LIFESTYLE</span>
+          <h1 class="serif-title hero-title" data-i18n="hero_title">Conteúdo de beleza que educa, conecta e leva à ação.</h1>
+          <p class="hero-location" data-i18n="hero_locations">Brasil · Moçambique · Angola</p>
+
+          <div class="hero-ctas">
+            <a href="#contacto" class="btn-primary" data-i18n="hero_cta_primary">Iniciar uma parceria</a>
+            <button type="button" class="btn-outline" onclick="openModal('mediaKitModal')" data-i18n="hero_cta_secondary">Descarregar media kit</button>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric-card">
+              <span class="metric-value" data-count="124.5" data-decimals="1" data-suffix="K">0</span>
+              <span class="metric-label" data-i18n="metric_followers">Seguidores</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-value" data-count="1.2" data-decimals="1" data-suffix="M">0</span>
+              <span class="metric-label" data-i18n="metric_views">Visualizações</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-value" data-count="74.5" data-decimals="1" data-suffix="%">0</span>
+              <span class="metric-label" data-i18n="metric_retention">Retenção</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-media reveal in-view">
+          <img
+            src="https://images.pexels.com/photos/38721813/pexels-photo-38721813.jpeg"
+            onerror="this.onerror=null; this.src='https://placehold.co/800x880/785B45/FFFFFF?text=Mayra+Cremildo';"
+            alt="Mayra Cremildo — Retrato Editorial"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. SOBRE ==================== -->
+    <section id="sobre" class="about-section">
+      <div class="container about-grid">
+        <div class="reveal">
+          <span class="eyebrow" data-i18n="about_eyebrow">SOBRE</span>
+          <p class="about-lead" data-i18n="about_lead">
+            Mayra Cremildo é uma criadora de Beleza, Cabelo e Lifestyle que liga marcas a uma audiência feminina de língua portuguesa em Portugal, Angola e Moçambique.
+          </p>
+          <div class="about-body">
+            <p data-i18n="about_body_1">
+              Com formação em Gestão de Marketing e a criar conteúdo desde 2019, une estética editorial e storytelling prático sobre pele, cabelo 4C, maquilhagem e lifestyle.
+            </p>
+            <p data-i18n="about_body_2">
+              Transforma mensagens de produto em conteúdo claro e próximo, que gera confiança e leva à ação.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-portrait reveal">
+          <img
+            src="https://images.pexels.com/photos/38774154/pexels-photo-38774154.jpeg"
+            onerror="this.onerror=null; this.src='https://placehold.co/760x860/EAE4DA/2A1E17?text=Sobre+Mayra';"
+            alt="Mayra Cremildo"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 4. AUDIÊNCIA ==================== -->
+    <section id="audiencia" class="cream-band">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow" data-i18n="aud_eyebrow">AUDIÊNCIA</span>
+          <h2 class="serif-title section-title" data-i18n="aud_title">Quem a Mayra alcança</h2>
+          <p class="section-subtitle" data-i18n="aud_subtitle">
+            O conteúdo da Mayra é assistido principalmente em Portugal — 88% dos seus espetadores no TikTok nos últimos 28 dias até 25 de outubro de 2026 — enquanto a sua base de seguidores também alcança Angola, Moçambique e Brasil.
+          </p>
+        </div>
+
+        <div class="audience-grid">
+          <!-- Cartão 1: Género -->
+          <div class="data-card reveal" id="genderCard">
+            <h3 class="data-card-title" data-i18n="aud_gender_title">Género</h3>
+            <span class="data-card-meta" data-i18n="aud_gender_meta">INSTAGRAM · 1–31 DE AGOSTO DE 2026</span>
+
+            <div class="donut-wrap">
+              <svg viewBox="0 0 120 120" class="donut-svg" aria-label="Género: 77.4% Mulheres, 22.6% Homens">
+                <circle cx="60" cy="60" r="46" class="donut-track" />
+                <circle cx="60" cy="60" r="46" class="donut-fill" id="genderDonutFill" data-target-offset="65.32" />
+              </svg>
+
+              <div class="donut-legend">
+                <div class="legend-item">
+                  <span class="legend-left">
+                    <span class="legend-dot" style="background:#845943;"></span>
+                    <span data-i18n="aud_women">Mulheres</span>
+                  </span>
+                  <strong data-count="77.4" data-decimals="1" data-suffix="%">0%</strong>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-left">
+                    <span class="legend-dot" style="background:#EDE8E0; border:1px solid rgba(42,30,23,0.18);"></span>
+                    <span data-i18n="aud_men">Homens</span>
+                  </span>
+                  <strong data-count="22.6" data-decimals="1" data-suffix="%">0%</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cartão 2: Idade -->
+          <div class="data-card reveal">
+            <h3 class="data-card-title" data-i18n="aud_age_title">Idade</h3>
+            <span class="data-card-meta" data-i18n="aud_combined_meta">DADOS DE AUDIÊNCIA · INSTAGRAM + TIKTOK</span>
+
+            <div class="bar-list">
+              <div>
+                <div class="bar-row-top"><span>18–24</span><span class="bar-pct" data-count="41.7" data-decimals="1" data-suffix="%">0%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="41.7%"></div></div>
+              </div>
+              <div>
+                <div class="bar-row-top"><span>25–34</span><span class="bar-pct" data-count="47.4" data-decimals="1" data-suffix="%">0%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="47.4%"></div></div>
+              </div>
+              <div>
+                <div class="bar-row-top"><span>35–44</span><span class="bar-pct" data-count="6" data-decimals="0" data-suffix="%">0%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="6%"></div></div>
+              </div>
+              <div>
+                <div class="bar-row-top"><span>45–54</span><span class="bar-pct" data-count="1.6" data-decimals="1" data-suffix="%">0%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="2.2%"></div></div>
+              </div>
+              <div>
+                <div class="bar-row-top"><span>55–64</span><span class="bar-pct" data-count="0.4" data-decimals="1" data-suffix="%">0%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="1.2%"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cartão 3: Principais países -->
+          <div class="data-card reveal">
+            <h3 class="data-card-title" data-i18n="aud_countries_title">Principais países</h3>
+            <span class="data-card-meta" data-i18n="aud_combined_meta">DADOS DE AUDIÊNCIA · INSTAGRAM + TIKTOK</span>
+
+            <div class="bar-list">
+              <div>
+                <div class="bar-row-top"><span data-i18n="country_pt">Portugal</span><span class="bar-pct" data-count="88.1" data-decimals="1" data-suffix="%">0%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="88.1%"></div></div>
+              </div>
+              <div>
+                <div class="bar-row-top"><span data-i18n="country_ao">Angola</span><span class="bar-pct" data-count="6.8" data-decimals="1" data-suffix="%">0%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="6.8%"></div></div>
+              </div>
+              <div>
+                <div class="bar-row-top"><span data-i18n="country_ro">Roménia</span><span class="bar-pct" data-count="3" data-decimals="0" data-suffix="%">0%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="3.2%"></div></div>
+              </div>
+              <div>
+                <div class="bar-row-top"><span data-i18n="country_mz">Moçambique</span><span class="bar-pct" data-count="1.2" data-decimals="1" data-suffix="%">0%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="1.8%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 5. DESEMPENHO ==================== -->
+    <section id="desempenho" class="cream-band">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow" data-i18n="perf_eyebrow">DESEMPENHO</span>
+          <h2 class="serif-title section-title" data-i18n="perf_title">Desempenho verificado por plataforma</h2>
+          <p class="section-subtitle" data-i18n="perf_subtitle">
+            Números retirados diretamente das estatísticas das plataformas. Sem estimativas nem projeções.
+          </p>
+        </div>
+
+        <div class="platform-grid">
+          <!-- Instagram -->
+          <div class="platform-card reveal">
+            <div>
+              <div class="platform-header">
+                <h3 class="platform-name">Instagram</h3>
+                <span class="platform-period" data-i18n="perf_ig_period">ÚLTIMOS 30 DIAS · ATÉ 27 DE OUTUBRO DE 2026</span>
+              </div>
+
+              <div class="platform-stats">
+                <div>
+                  <div class="plat-lbl" data-i18n="metric_followers">Seguidores</div>
+                  <div class="plat-num" data-count="53.2" data-decimals="1" data-suffix="K">0</div>
+                </div>
+                <div>
+                  <div class="plat-lbl" data-i18n="metric_views">Visualizações</div>
+                  <div class="plat-num" data-count="1.2" data-decimals="1" data-suffix="M">0</div>
+                </div>
+                <div>
+                  <div class="plat-lbl" data-i18n="perf_viewers">Espetadores</div>
+                  <div class="plat-num" data-count="250.5" data-decimals="1" data-suffix="K">0</div>
+                </div>
+                <div>
+                  <div class="plat-lbl" data-i18n="perf_interactions">Interações com conteúdo</div>
+                  <div class="plat-num" data-count="82.7" data-decimals="1" data-suffix="K">0</div>
+                </div>
+                <div>
+                  <div class="plat-lbl" data-i18n="perf_accounts_engaged">Contas envolvidas</div>
+                  <div class="plat-num" data-count="37.6" data-decimals="1" data-suffix="K">0</div>
+                </div>
+                <div>
+                  <div class="plat-lbl" data-i18n="perf_profile_visits">Visitas ao perfil</div>
+                  <div class="plat-num" data-count="8.2" data-decimals="1" data-suffix="K">0</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-foot" data-i18n="perf_updated">DADOS ATUALIZADOS: OUTUBRO DE 2026</div>
+          </div>
+
+          <!-- TikTok -->
+          <div class="platform-card reveal">
+            <div>
+              <div class="platform-header">
+                <h3 class="platform-name">TikTok</h3>
+                <span class="platform-period" data-i18n="perf_tt_period">ÚLTIMOS 28 DIAS · ATÉ 25 DE OUTUBRO DE 2026</span>
+              </div>
+
+              <div class="platform-stats">
+                <div>
+                  <div class="plat-lbl" data-i18n="metric_followers">Seguidores</div>
+                  <div class="plat-num" data-count="69.9" data-decimals="1" data-suffix="K">0</div>
+                </div>
+                <div>
+                  <div class="plat-lbl" data-i18n="perf_video_views">Visualizações de vídeo</div>
+                  <div class="plat-num" data-count="3.4" data-decimals="1" data-suffix="M">0</div>
+                </div>
+                <div>
+                  <div class="plat-lbl" data-i18n="perf_viewers">Espetadores</div>
+                  <div class="plat-num" data-count="928" data-decimals="0" data-suffix="K">0</div>
+                </div>
+                <div>
+                  <div class="plat-lbl" data-i18n="perf_likes">Gostos</div>
+                  <div class="plat-num" data-count="100.9" data-decimals="1" data-suffix="K">0</div>
+                </div>
+                <div>
+                  <div class="plat-lbl" data-i18n="perf_shares">Partilhas</div>
+                  <div class="plat-num" data-count="10.8" data-decimals="1" data-suffix="K">0</div>
+                </div>
+                <div>
+                  <div class="plat-lbl" data-i18n="perf_profile_views">Visualizações do perfil</div>
+                  <div class="plat-num" data-count="18.3" data-decimals="1" data-suffix="K">0</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-foot" data-i18n="perf_updated">DADOS ATUALIZADOS: OUTUBRO DE 2026</div>
+          </div>
+        </div>
+
+        <div class="combined-box reveal">
+          <div class="plat-lbl" data-i18n="perf_combined_label">Seguidores combinados</div>
+          <div class="plat-num" data-count="123.1" data-decimals="1" data-suffix="K">0</div>
+        </div>
+
+        <p class="footnote reveal" data-i18n="perf_footnote">
+          Os seguidores são combinados porque ambas as plataformas reportam a mesma métrica pontual de conta. Os números do Instagram cobrem os últimos 30 dias até 27 de outubro de 2026 e os do TikTok os últimos 28 dias até 25 de outubro de 2026, pelo que as visualizações e interações são apresentadas por plataforma e nunca somadas. A taxa de engajamento não é exibida intencionalmente até que dados verificados de origem sejam fornecidos.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== 6. NICHOS & SERVIÇOS ==================== -->
+    <section id="nichos" class="niches-section">
+      <div class="container">
+        <h2 class="niches-title reveal" data-i18n="niches_title">Nichos &amp; Serviços</h2>
+
+        <div class="niches-stage">
+          <div class="niches-portrait">
+            <img
+              src="https://images.pexels.com/photos/38740210/pexels-photo-38740210.jpeg"
+              onerror="this.onerror=null; this.src='https://placehold.co/800x850/785B45/FFFFFF?text=Nichos+%26+Servicos';"
+              alt="Nichos e Serviços — Mayra Cremildo"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div class="pills-stack">
+            <button type="button" class="niche-pill step-1" onclick="openPortfolioCategory('campanhas')" data-i18n="pill_1">CAMPANHAS</button>
+            <button type="button" class="niche-pill step-2" onclick="openPortfolioCategory('beleza')" data-i18n="pill_2">BELEZA</button>
+            <button type="button" class="niche-pill step-3" onclick="openPortfolioCategory('maquiagem')" data-i18n="pill_3">MAQUIAGEM</button>
+            <button type="button" class="niche-pill step-4" onclick="openPortfolioCategory('cabelo')" data-i18n="pill_4">CABELO</button>
+            <button type="button" class="niche-pill step-5" onclick="openPortfolioCategory('lifestyle')" data-i18n="pill_5">LIFESTYLE</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 7. PORTFÓLIO / TRABALHOS SELECIONADOS ==================== -->
+    <section id="trabalhos" class="cream-band">
+      <div class="container">
+        <div class="port-top reveal">
+          <div style="max-width:650px;">
+            <span class="eyebrow" data-i18n="port_eyebrow">PORTFÓLIO</span>
+            <h2 class="serif-title section-title" data-i18n="port_title">Trabalhos selecionados</h2>
+            <p class="section-subtitle" data-i18n="port_subtitle">
+              Uma seleção de conteúdo de beleza, cabelo, maquilhagem e lifestyle que reflete o estilo criativo da Mayra e a sua capacidade de se ligar à audiência.
+            </p>
+          </div>
+
+          <a href="#nichos" id="backToNichesBtn" class="back-niches-btn">
+            <span>↑</span>
+            <span data-i18n="port_back_btn">Voltar a Nichos &amp; Serviços</span>
+          </a>
+        </div>
+
+        <div class="filter-bar" role="tablist">
+          <button type="button" class="filter-btn active" data-filter="todos" onclick="renderPortfolio('todos')" data-i18n="filter_all">TODOS</button>
+          <button type="button" class="filter-btn" data-filter="campanhas" onclick="renderPortfolio('campanhas')" data-i18n="pill_1">CAMPANHAS</button>
+          <button type="button" class="filter-btn" data-filter="beleza" onclick="renderPortfolio('beleza')" data-i18n="pill_2">BELEZA</button>
+          <button type="button" class="filter-btn" data-filter="maquiagem" onclick="renderPortfolio('maquiagem')" data-i18n="pill_3">MAQUIAGEM</button>
+          <button type="button" class="filter-btn" data-filter="cabelo" onclick="renderPortfolio('cabelo')" data-i18n="pill_4">CABELO</button>
+          <button type="button" class="filter-btn" data-filter="lifestyle" onclick="renderPortfolio('lifestyle')" data-i18n="pill_5">LIFESTYLE</button>
+        </div>
+
+        <div id="portfolioGrid" class="portfolio-grid"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 8. MARCAS PARCEIRAS SELECIONADAS ==================== -->
+    <section id="marcas" class="brands-section">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow" data-i18n="brands_eyebrow">MARCAS PARCEIRAS SELECIONADAS</span>
+          <h2 class="serif-title section-title" data-i18n="brands_title">Marcas parceiras selecionadas</h2>
+          <p class="section-subtitle" data-i18n="brands_subtitle">Uma seleção de marcas com que a Mayra já trabalhou.</p>
+        </div>
+
+        <div class="brands-grid reveal">
+          <!-- 1. SEPHORA -->
+          <div class="brand-item brand-sephora" title="Sephora">
+            <svg viewBox="0 0 210 48" aria-label="Sephora">
+              <text x="105" y="30" text-anchor="middle" class="b-primary" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="500" font-size="18.5" letter-spacing="6.5">SEPHORA</text>
+              <path d="M101 38 Q105 35 109 38 Q105 41 101 38 Z" class="b-accent" opacity="0.85" />
+            </svg>
+          </div>
+
+          <!-- 2. L'ORÉAL -->
+          <div class="brand-item brand-loreal" title="L'Oréal">
+            <svg viewBox="0 0 210 48" aria-label="L'Oréal">
+              <text x="105" y="31" text-anchor="middle" class="b-primary" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="500" font-size="21" letter-spacing="3.5">L’ORÉAL</text>
+              <rect x="64" y="37" width="82" height="1.4" rx="0.7" class="b-accent" opacity="0.75" />
+            </svg>
+          </div>
+
+          <!-- 3. KIKO MILANO -->
+          <div class="brand-item brand-kiko" title="Kiko Milano">
+            <svg viewBox="0 0 200 58" aria-label="Kiko Milano">
+              <text x="100" y="30" text-anchor="middle" class="b-primary" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="700" font-size="25" letter-spacing="3.2">KIKO</text>
+              <text x="100" y="45" text-anchor="middle" class="b-accent" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="600" font-size="8.2" letter-spacing="4.6">MILANO</text>
+            </svg>
+          </div>
+
+          <!-- 4. THE BODY SHOP -->
+          <div class="brand-item brand-bodyshop" title="The Body Shop">
+            <svg viewBox="0 0 120 74" aria-label="The Body Shop">
+              <path d="M40 16 A24 24 0 0 1 80 16" fill="none" class="b-stroke" stroke-width="2.6" stroke-linecap="round" />
+              <path d="M36 24 A26 26 0 0 0 52 60" fill="none" class="b-stroke" stroke-width="2.4" stroke-linecap="round" />
+              <path d="M84 24 A26 26 0 0 1 68 60" fill="none" class="b-stroke" stroke-width="2.4" stroke-linecap="round" />
+              <text x="60" y="31" text-anchor="middle" class="b-accent" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="700" font-size="7.5" letter-spacing="1.2">THE</text>
+              <text x="60" y="41" text-anchor="middle" class="b-primary" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="700" font-size="8.5" letter-spacing="1">BODY</text>
+              <text x="60" y="51" text-anchor="middle" class="b-primary" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="700" font-size="8.5" letter-spacing="1">SHOP</text>
+            </svg>
+          </div>
+
+          <!-- 5. URIAGE EAU THERMALE -->
+          <div class="brand-item brand-uriage" title="Uriage Eau Thermale">
+            <svg viewBox="0 0 210 60" aria-label="Uriage Eau Thermale">
+              <text x="105" y="30" text-anchor="middle" class="b-primary" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="400" font-size="22.5" letter-spacing="3.2">URIAGE</text>
+              <text x="105" y="46" text-anchor="middle" class="b-accent" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="500" font-size="7.4" letter-spacing="3.8">EAU THERMALE</text>
+            </svg>
+          </div>
+
+          <!-- 6. erborian KOREAN SKIN THERAPY -->
+          <div class="brand-item brand-erborian" title="Erborian Korean Skin Therapy">
+            <svg viewBox="0 0 230 60" aria-label="Erborian Korean Skin Therapy">
+              <rect x="18" y="14" width="28" height="30" rx="6" class="b-primary" />
+              <path d="M32 39 L32 21 M32 27 L25 23 M32 31 L39 26 M32 35 L25 32" stroke="#F5F2ED" stroke-width="2.1" stroke-linecap="round" fill="none" />
+              <text x="56" y="30" class="b-secondary" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="500" font-size="18.5" letter-spacing="3.2">erborian</text>
+              <text x="57" y="42" class="b-accent" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="600" font-size="6.4" letter-spacing="1.7">KOREAN SKIN THERAPY</text>
+            </svg>
+          </div>
+
+          <!-- 7. oBoticário -->
+          <div class="brand-item brand-boticario" title="O Boticário">
+            <svg viewBox="0 0 210 58" aria-label="O Boticário">
+              <text x="105" y="36" text-anchor="middle" class="b-primary" font-family="'Plus Jakarta Sans', Georgia, sans-serif" font-weight="500" font-size="23" letter-spacing="-0.4">oBoticário</text>
+              <path d="M137 16 Q141 12 144 16 Q140 19 137 16 Z" class="b-accent" />
+            </svg>
+          </div>
+
+          <!-- 8. dermage -->
+          <div class="brand-item brand-dermage" title="Dermage">
+            <svg viewBox="0 0 210 58" aria-label="Dermage">
+              <text x="105" y="36" text-anchor="middle" class="b-primary" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="400" font-size="25" letter-spacing="-0.8">dermage</text>
+              <circle cx="163" cy="21" r="2.2" class="b-accent" />
+            </svg>
+          </div>
+
+          <!-- 9. RITUALS... COSMETICS -->
+          <div class="brand-item brand-rituals" title="Rituals Cosmetics">
+            <svg viewBox="0 0 120 74" aria-label="Rituals Cosmetics">
+              <rect x="41" y="10" width="38" height="44" fill="none" class="b-stroke" stroke-width="1.3" />
+              <rect x="44" y="13" width="32" height="38" fill="none" class="b-stroke" stroke-width="0.8" stroke-dasharray="2 1.5" />
+              <text x="60" y="24" text-anchor="middle" class="b-primary" font-family="Georgia, serif" font-size="7.5" letter-spacing="2.2">RIT</text>
+              <text x="60" y="35" text-anchor="middle" class="b-primary" font-family="Georgia, serif" font-size="7.5" letter-spacing="2.2">UAL</text>
+              <text x="60" y="46" text-anchor="middle" class="b-primary" font-family="Georgia, serif" font-size="7.5" letter-spacing="1.4">S...</text>
+              <text x="60" y="64" text-anchor="middle" class="b-accent" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="600" font-size="5.4" letter-spacing="2.2">COSMETICS</text>
+            </svg>
+          </div>
+
+          <!-- 10. PRIMOR -->
+          <div class="brand-item brand-primor" title="Primor">
+            <svg viewBox="0 0 210 58" aria-label="Primor">
+              <text x="105" y="33" text-anchor="middle" class="b-primary" font-family="'Cormorant Garamond', Georgia, serif" font-weight="700" font-size="29" letter-spacing="1.5">PRIMOR</text>
+              <path d="M44 41 Q82 37 112 41 T166 40" fill="none" class="b-stroke" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <!-- 11. MORPHE -->
+          <div class="brand-item brand-morphe" title="Morphe">
+            <svg viewBox="0 0 210 54" aria-label="Morphe">
+              <text x="105" y="33" text-anchor="middle" class="b-primary" font-family="Georgia, serif" font-weight="700" font-size="19" letter-spacing="4.8">MORPHE</text>
+              <rect x="86" y="40" width="38" height="1.5" class="b-accent" />
+            </svg>
+          </div>
+
+          <!-- 12. lola cosmetics -->
+          <div class="brand-item brand-lola" title="Lola Cosmetics">
+            <svg viewBox="0 0 120 74" aria-label="Lola Cosmetics">
+              <circle cx="60" cy="37" r="24" class="b-primary" />
+              <circle cx="60" cy="37" r="21" fill="none" stroke="#F5F2ED" stroke-width="1.2" stroke-dasharray="2.5 2" />
+              <text x="60" y="39" text-anchor="middle" fill="#F5F2ED" font-family="'Cormorant Garamond', Georgia, serif" font-weight="600" font-size="16" letter-spacing="-0.5">lola</text>
+              <text x="60" y="48" text-anchor="middle" fill="#F5F2ED" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="4.8" letter-spacing="1.2">cosmetics</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 9. SERVIÇOS — COMO AS MARCAS TRABALHAM ==================== -->
+    <section id="servicos" class="cream-band">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow" data-i18n="srv_eyebrow">SERVIÇOS</span>
+          <h2 class="serif-title section-title" data-i18n="srv_title">Como as marcas trabalham com a Mayra</h2>
+        </div>
+
+        <div class="formats-grid">
+          <article class="format-card reveal">
+            <h3 class="format-title" data-i18n="srv_1_t">TikTok e Instagram Reels</h3>
+            <p class="format-desc" data-i18n="srv_1_d">
+              Vídeo curto construído em torno de uma mensagem clara do produto e de storytelling envolvente.
+            </p>
+          </article>
+
+          <article class="format-card reveal">
+            <h3 class="format-title" data-i18n="srv_2_t">Instagram Stories</h3>
+            <p class="format-desc" data-i18n="srv_2_d">
+              Storytelling sequenciado que combina demonstração do produto, experiência pessoal e uma chamada à ação clara.
+            </p>
+          </article>
+
+          <article class="format-card reveal">
+            <h3 class="format-title" data-i18n="srv_3_t">Conteúdo UGC</h3>
+            <p class="format-desc" data-i18n="srv_3_d">
+              Conteúdo criado para a marca, para utilização nos seus próprios canais sociais e media pago.
+            </p>
+          </article>
+
+          <article class="format-card reveal">
+            <h3 class="format-title" data-i18n="srv_4_t">Tutoriais, demonstrações, análises e unboxings</h3>
+            <p class="format-desc" data-i18n="srv_4_d">
+              Formatos educativos que mostram como um produto funciona, se comporta e se integra em rotinas reais.
+            </p>
+          </article>
+
+          <article class="format-card reveal">
+            <h3 class="format-title" data-i18n="srv_5_t">Cobertura de eventos</h3>
+            <p class="format-desc" data-i18n="srv_5_d">
+              Captação de conteúdo ao vivo e storytelling no próprio dia, a partir de eventos e experiências da marca.
+            </p>
+          </article>
+
+          <article class="format-card reveal">
+            <h3 class="format-title" data-i18n="srv_6_t">Campanhas e parcerias de embaixadora</h3>
+            <p class="format-desc" data-i18n="srv_6_d">
+              Campanhas com múltiplos entregáveis e parcerias de longo prazo construídas em torno de uma representação consistente da marca.
+            </p>
+          </article>
+        </div>
+
+        <p class="formats-note reveal" data-i18n="srv_note">
+          Direitos de utilização, media pago, whitelisting, exclusividade e imagens em bruto são orçamentados à parte.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== 10. CONTACTO — VAMOS CRIAR ALGO COM IMPACTO ==================== -->
+    <section id="contacto" class="cream-band" style="padding-bottom:96px;">
+      <div class="container">
+        <div class="section-header reveal" style="margin-bottom:0;">
+          <span class="eyebrow" data-i18n="cnt_eyebrow">CONTACTO</span>
+          <h2 class="serif-title section-title" data-i18n="cnt_title">Vamos criar algo com impacto.</h2>
+          <p class="section-subtitle" data-i18n="cnt_subtitle">
+            Partilhe alguns detalhes sobre a sua marca e campanha e a Mayra responderá com formatos relevantes, disponibilidade e uma proposta à medida.
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <aside class="contact-info-card reveal">
+            <div class="contact-block">
+              <div class="contact-label">EMAIL</div>
+              <a href="mailto:mayrapartnership@gmail.com" class="contact-email-link">mayrapartnership@gmail.com</a>
+            </div>
+
+            <div class="contact-block">
+              <div class="contact-label" data-i18n="cnt_socials">REDES SOCIAIS</div>
+              <div class="contact-social-links">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a>
+              </div>
+            </div>
+
+            <p class="contact-meta-foot" data-i18n="cnt_location_note">
+              Brasil · Moçambique · Angola · Conteúdo de beleza que educa, conecta e leva à ação
+            </p>
+          </aside>
+
+          <form id="partnershipForm" class="contact-form-grid reveal" onsubmit="handlePartnershipSubmit(event)">
+            <div class="form-row-2">
+              <div>
+                <label for="fldName" class="field-label" data-i18n="cnt_lbl_name">Nome</label>
+                <input id="fldName" type="text" required class="field-control" />
+              </div>
+              <div>
+                <label for="fldCompany" class="field-label" data-i18n="cnt_lbl_company">Empresa</label>
+                <input id="fldCompany" type="text" required class="field-control" />
+              </div>
+            </div>
+
+            <div>
+              <label for="fldEmail" class="field-label" data-i18n="cnt_lbl_email">Email</label>
+              <input id="fldEmail" type="email" required class="field-control" />
+            </div>
+
+            <div class="form-row-2">
+              <div>
+                <label for="fldGoal" class="field-label" data-i18n="cnt_lbl_goal">Objetivo da campanha</label>
+                <select id="fldGoal" class="field-control">
+                  <option value="" data-i18n="cnt_opt_goal_0">Selecione um objetivo</option>
+                  <option value="launch" data-i18n="cnt_opt_goal_1">Lançamento de produto</option>
+                  <option value="awareness" data-i18n="cnt_opt_goal_2">Reconhecimento de marca</option>
+                  <option value="ugc" data-i18n="cnt_opt_goal_3">Conteúdo UGC / Media pago</option>
+                  <option value="event" data-i18n="cnt_opt_goal_4">Cobertura de evento</option>
+                  <option value="ambassador" data-i18n="cnt_opt_goal_5">Parceria de embaixadora</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="fldTimeline" class="field-label" data-i18n="cnt_lbl_timeline">Prazo</label>
+                <select id="fldTimeline" class="field-control">
+                  <option value="" data-i18n="cnt_opt_time_0">Selecione um prazo</option>
+                  <option value="immediate" data-i18n="cnt_opt_time_1">Imediato (até 2 semanas)</option>
+                  <option value="month" data-i18n="cnt_opt_time_2">Este mês</option>
+                  <option value="quarter" data-i18n="cnt_opt_time_3">Próximo trimestre</option>
+                  <option value="flexible" data-i18n="cnt_opt_time_4">Flexível</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="fldMessage" class="field-label" data-i18n="cnt_lbl_message">Mensagem</label>
+              <textarea id="fldMessage" rows="5" required class="field-control"></textarea>
+            </div>
+
+            <button type="submit" class="submit-pill-btn" data-i18n="nav_cta">Iniciar uma parceria</button>
+
+            <div id="partnershipFeedback" class="form-feedback" data-i18n="cnt_feedback">
+              Obrigada pelo contacto! Os detalhes da sua campanha foram recebidos e a Mayra responderá em breve.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== 11. RODAPÉ ==================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p data-i18n="footer_copy">© 2026 Mayra Cremildo. Todos os direitos reservados.</p>
+      <a href="mailto:mayrapartnership@gmail.com" class="footer-email">mayrapartnership@gmail.com</a>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL: MEDIA KIT ==================== -->
+  <div id="mediaKitModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button type="button" class="modal-close-x" onclick="closeModal('mediaKitModal')" aria-label="Fechar">✕</button>
+      <span class="eyebrow">MEDIA KIT 2026</span>
+      <h3 class="data-card-title">Mayra Cremildo</h3>
+      <p class="section-subtitle" style="font-size:13.5px; margin-top:8px;" data-i18n="mk_desc">
+        Métricas consolidadas de alcance orgânico, demografia e entregas comerciais multiplataforma.
+      </p>
+
+      <div class="mk-stats-grid">
+        <div class="mk-stat-box">
+          <div class="mk-stat-num">124.5K</div>
+          <div class="mk-stat-lbl" data-i18n="metric_followers">Seguidores</div>
+        </div>
+        <div class="mk-stat-box">
+          <div class="mk-stat-num">4.6M+</div>
+          <div class="mk-stat-lbl" data-i18n="metric_views">Visualizações</div>
+        </div>
+        <div class="mk-stat-box">
+          <div class="mk-stat-num">77.4%</div>
+          <div class="mk-stat-lbl" data-i18n="aud_women">Mulheres</div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;">
+        <button type="button" class="btn-primary" onclick="triggerMediaKitDownload()" data-i18n="mk_download_btn">
+          Descarregar Resumo (.TXT)
+        </button>
+        <button type="button" class="btn-outline" onclick="window.print()" data-i18n="mk_print_btn">
+          Imprimir / Salvar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== VISTA EDITORIAL INDIVIDUAL DO CONTEÚDO ==================== -->
+  <div id="workPreviewModal" class="detail-overlay" role="dialog" aria-modal="true">
+    <div class="detail-wrap">
+      <div class="detail-header">
+        <div>
+          <span id="workPreviewBrand" class="eyebrow" style="margin-bottom:0;">KIKO MILANO</span>
+          <h3 id="workPreviewTitle" class="detail-title">Love Fusion — primeiras impressões</h3>
+          <p id="workPreviewMeta" class="detail-meta">Maquilhagem · TikTok · Instagram · 2026-04-02</p>
+        </div>
+
+        <div class="detail-nav-group">
+          <button type="button" class="nav-circle-btn" onclick="stepWorkPreview(-1)" aria-label="Anterior" title="Anterior">←</button>
+          <button type="button" class="nav-circle-btn" onclick="stepWorkPreview(1)" aria-label="Seguinte" title="Seguinte">→</button>
+          <button type="button" class="pill-close" onclick="closeWorkPreview()" data-i18n="btn_close">Fechar</button>
+        </div>
+      </div>
+
+      <div id="workPreviewMediaContainer" class="detail-media"></div>
+
+      <p id="workPreviewDesc" class="detail-desc"></p>
+
+      <div class="detail-stats">
+        <div class="stat-card">
+          <div id="statViews" class="stat-val">41K</div>
+          <div class="stat-lbl" data-i18n="stat_views">Visualizações</div>
+        </div>
+        <div class="stat-card">
+          <div id="statLikes" class="stat-val">5.2K</div>
+          <div class="stat-lbl" data-i18n="stat_likes">Gostos</div>
+        </div>
+        <div class="stat-card">
+          <div id="statComments" class="stat-val">55</div>
+          <div class="stat-lbl" data-i18n="stat_comments">Comentários</div>
+        </div>
+        <div class="stat-card">
+          <div id="statShares" class="stat-val">73</div>
+          <div class="stat-lbl" data-i18n="stat_shares">Partilhas</div>
+        </div>
+        <div class="stat-card">
+          <div id="statSaves" class="stat-val">239</div>
+          <div class="stat-lbl" data-i18n="stat_saves">Guardados</div>
+        </div>
+      </div>
+
+      <div class="detail-foot">
+        <button type="button" class="pill-close" onclick="openOriginalContentLink()" data-i18n="btn_view_content">
+          Ver conteúdo
+        </button>
+        <span id="noLinkNotice" class="no-link-msg"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      pt: {
+        nav_about: "Sobre",
+        nav_audience: "Audiência",
+        nav_works: "Trabalhos",
+        nav_services: "Serviços",
+        nav_contact: "Contacto",
+        nav_cta: "Iniciar uma parceria",
+        hero_eyebrow: "CRIADORA DE BELEZA, CABELO & LIFESTYLE",
+        hero_title: "Conteúdo de beleza que educa, conecta e leva à ação.",
+        hero_locations: "Brasil · Moçambique · Angola",
+        hero_cta_primary: "Iniciar uma parceria",
+        hero_cta_secondary: "Descarregar media kit",
+        metric_followers: "Seguidores",
+        metric_views: "Visualizações",
+        metric_retention: "Retenção",
+        about_eyebrow: "SOBRE",
+        about_lead: "Mayra Cremildo é uma criadora de Beleza, Cabelo e Lifestyle que liga marcas a uma audiência feminina de língua portuguesa em Portugal, Angola e Moçambique.",
+        about_body_1: "Com formação em Gestão de Marketing e a criar conteúdo desde 2019, une estética editorial e storytelling prático sobre pele, cabelo 4C, maquilhagem e lifestyle.",
+        about_body_2: "Transforma mensagens de produto em conteúdo claro e próximo, que gera confiança e leva à ação.",
+        aud_eyebrow: "AUDIÊNCIA",
+        aud_title: "Quem a Mayra alcança",
+        aud_subtitle: "O conteúdo da Mayra é assistido principalmente em Portugal — 88% dos seus espetadores no TikTok nos últimos 28 dias até 25 de outubro de 2026 — enquanto a sua base de seguidores também alcança Angola, Moçambique e Brasil.",
+        aud_gender_title: "Género",
+        aud_gender_meta: "INSTAGRAM · 1–31 DE AGOSTO DE 2026",
+        aud_women: "Mulheres",
+        aud_men: "Homens",
+        aud_age_title: "Idade",
+        aud_countries_title: "Principais países",
+        aud_combined_meta: "DADOS DE AUDIÊNCIA · INSTAGRAM + TIKTOK",
+        country_pt: "Portugal",
+        country_ao: "Angola",
+        country_ro: "Roménia",
+        country_mz: "Moçambique",
+        perf_eyebrow: "DESEMPENHO",
+        perf_title: "Desempenho verificado por plataforma",
+        perf_subtitle: "Números retirados diretamente das estatísticas das plataformas. Sem estimativas nem projeções.",
+        perf_ig_period: "ÚLTIMOS 30 DIAS · ATÉ 27 DE OUTUBRO DE 2026",
+        perf_tt_period: "ÚLTIMOS 28 DIAS · ATÉ 25 DE OUTUBRO DE 2026",
+        perf_viewers: "Espetadores",
+        perf_interactions: "Interações com conteúdo",
+        perf_accounts_engaged: "Contas envolvidas",
+        perf_profile_visits: "Visitas ao perfil",
+        perf_video_views: "Visualizações de vídeo",
+        perf_likes: "Gostos",
+        perf_shares: "Partilhas",
+        perf_profile_views: "Visualizações do perfil",
+        perf_updated: "DADOS ATUALIZADOS: OUTUBRO DE 2026",
+        perf_combined_label: "Seguidores combinados",
+        perf_footnote: "Os seguidores são combinados porque ambas as plataformas reportam a mesma métrica pontual de conta. Os números do Instagram cobrem os últimos 30 dias até 27 de outubro de 2026 e os do TikTok os últimos 28 dias até 25 de outubro de 2026, pelo que as visualizações e interações são apresentadas por plataforma e nunca somadas. A taxa de engajamento não é exibida intencionalmente até que dados verificados de origem sejam fornecidos.",
+        niches_title: "Nichos & Serviços",
+        port_eyebrow: "PORTFÓLIO",
+        port_title: "Trabalhos selecionados",
+        port_subtitle: "Uma seleção de conteúdo de beleza, cabelo, maquilhagem e lifestyle que reflete o estilo criativo da Mayra e a sua capacidade de se ligar à audiência.",
+        port_back_btn: "Voltar a Nichos & Serviços",
+        filter_all: "TODOS",
+        pill_1: "CAMPANHAS",
+        pill_2: "BELEZA",
+        pill_3: "MAQUIAGEM",
+        pill_4: "CABELO",
+        pill_5: "LIFESTYLE",
+        brands_eyebrow: "MARCAS PARCEIRAS SELECIONADAS",
+        brands_title: "Marcas parceiras selecionadas",
+        brands_subtitle: "Uma seleção de marcas com que a Mayra já trabalhou.",
+        srv_eyebrow: "SERVIÇOS",
+        srv_title: "Como as marcas trabalham com a Mayra",
+        srv_1_t: "TikTok e Instagram Reels",
+        srv_1_d: "Vídeo curto construído em torno de uma mensagem clara do produto e de storytelling envolvente.",
+        srv_2_t: "Instagram Stories",
+        srv_2_d: "Storytelling sequenciado que combina demonstração do produto, experiência pessoal e uma chamada à ação clara.",
+        srv_3_t: "Conteúdo UGC",
+        srv_3_d: "Conteúdo criado para a marca, para utilização nos seus próprios canais sociais e media pago.",
+        srv_4_t: "Tutoriais, demonstrações, análises e unboxings",
+        srv_4_d: "Formatos educativos que mostram como um produto funciona, se comporta e se integra em rotinas reais.",
+        srv_5_t: "Cobertura de eventos",
+        srv_5_d: "Captação de conteúdo ao vivo e storytelling no próprio dia, a partir de eventos e experiências da marca.",
+        srv_6_t: "Campanhas e parcerias de embaixadora",
+        srv_6_d: "Campanhas com múltiplos entregáveis e parcerias de longo prazo construídas em torno de uma representação consistente da marca.",
+        srv_note: "Direitos de utilização, media pago, whitelisting, exclusividade e imagens em bruto são orçamentados à parte.",
+        cnt_eyebrow: "CONTACTO",
+        cnt_title: "Vamos criar algo com impacto.",
+        cnt_subtitle: "Partilhe alguns detalhes sobre a sua marca e campanha e a Mayra responderá com formatos relevantes, disponibilidade e uma proposta à medida.",
+        cnt_socials: "REDES SOCIAIS",
+        cnt_location_note: "Brasil · Moçambique · Angola · Conteúdo de beleza que educa, conecta e leva à ação",
+        cnt_lbl_name: "Nome",
+        cnt_lbl_company: "Empresa",
+        cnt_lbl_email: "Email",
+        cnt_lbl_goal: "Objetivo da campanha",
+        cnt_opt_goal_0: "Selecione um objetivo",
+        cnt_opt_goal_1: "Lançamento de produto",
+        cnt_opt_goal_2: "Reconhecimento de marca",
+        cnt_opt_goal_3: "Conteúdo UGC / Media pago",
+        cnt_opt_goal_4: "Cobertura de evento",
+        cnt_opt_goal_5: "Parceria de embaixadora",
+        cnt_lbl_timeline: "Prazo",
+        cnt_opt_time_0: "Selecione um prazo",
+        cnt_opt_time_1: "Imediato (até 2 semanas)",
+        cnt_opt_time_2: "Este mês",
+        cnt_opt_time_3: "Próximo trimestre",
+        cnt_opt_time_4: "Flexível",
+        cnt_lbl_message: "Mensagem",
+        cnt_feedback: "Obrigada pelo contacto! Os detalhes da sua campanha foram recebidos e a Mayra responderá em breve.",
+        footer_copy: "© 2026 Mayra Cremildo. Todos os direitos reservados.",
+        mk_desc: "Métricas consolidadas de alcance orgânico, demografia e entregas comerciais multiplataforma.",
+        mk_download_btn: "Descarregar Resumo (.TXT)",
+        mk_print_btn: "Imprimir / Salvar PDF",
+        badge_campaign: "CAMPANHA",
+        btn_close: "Fechar",
+        btn_view_content: "Ver conteúdo",
+        stat_views: "Visualizações",
+        stat_likes: "Gostos",
+        stat_comments: "Comentários",
+        stat_shares: "Partilhas",
+        stat_saves: "Guardados",
+        no_link_notice: "Link do vídeo ainda não adicionado — cole o URL em videoUrl no código."
+      },
+      en: {
+        nav_about: "About",
+        nav_audience: "Audience",
+        nav_works: "Works",
+        nav_services: "Services",
+        nav_contact: "Contact",
+        nav_cta: "Start a partnership",
+        hero_eyebrow: "BEAUTY, HAIR & LIFESTYLE CREATOR",
+        hero_title: "Beauty content that educates, connects, and drives action.",
+        hero_locations: "Brazil · Mozambique · Angola",
+        hero_cta_primary: "Start a partnership",
+        hero_cta_secondary: "Download media kit",
+        metric_followers: "Followers",
+        metric_views: "Views",
+        metric_retention: "Retention",
+        about_eyebrow: "ABOUT",
+        about_lead: "Mayra Cremildo is a Beauty, Hair and Lifestyle creator connecting brands with a Portuguese-speaking female audience across Portugal, Angola and Mozambique.",
+        about_body_1: "With a background in Marketing Management and creating since 2019, she blends editorial aesthetics with practical storytelling on skincare, 4C hair, makeup and lifestyle.",
+        about_body_2: "She turns product messages into clear, relatable content that builds trust and drives action.",
+        aud_eyebrow: "AUDIENCE",
+        aud_title: "Who Mayra reaches",
+        aud_subtitle: "Mayra's content is watched mainly in Portugal — 88% of her TikTok viewers in the last 28 days to 25 October 2026 — while her follower base also reaches Angola, Mozambique and Brazil.",
+        aud_gender_title: "Gender",
+        aud_gender_meta: "INSTAGRAM · 1–31 AUGUST 2026",
+        aud_women: "Women",
+        aud_men: "Men",
+        aud_age_title: "Age",
+        aud_countries_title: "Top countries",
+        aud_combined_meta: "AUDIENCE DATA · INSTAGRAM + TIKTOK",
+        country_pt: "Portugal",
+        country_ao: "Angola",
+        country_ro: "Romania",
+        country_mz: "Mozambique",
+        perf_eyebrow: "PERFORMANCE",
+        perf_title: "Verified performance by platform",
+        perf_subtitle: "Numbers pulled directly from platform analytics. No estimates or projections.",
+        perf_ig_period: "LAST 30 DAYS · TO 27 OCTOBER 2026",
+        perf_tt_period: "LAST 28 DAYS · TO 25 OCTOBER 2026",
+        perf_viewers: "Viewers",
+        perf_interactions: "Content interactions",
+        perf_accounts_engaged: "Accounts engaged",
+        perf_profile_visits: "Profile visits",
+        perf_video_views: "Video views",
+        perf_likes: "Likes",
+        perf_shares: "Shares",
+        perf_profile_views: "Profile views",
+        perf_updated: "DATA UPDATED: OCTOBER 2026",
+        perf_combined_label: "Combined followers",
+        perf_footnote: "Followers are combined because both platforms report the same point-in-time account metric. Instagram figures cover the last 30 days to 27 October 2026 and TikTok figures the last 28 days to 25 October 2026, so views and interactions are shown per platform and never summed. Engagement rate is intentionally not shown until verified source data is supplied.",
+        niches_title: "Niches & Services",
+        port_eyebrow: "PORTFOLIO",
+        port_title: "Selected works",
+        port_subtitle: "A curated selection of beauty, hair, makeup, and lifestyle content reflecting Mayra's creative style and ability to connect with her audience.",
+        port_back_btn: "Back to Niches & Services",
+        filter_all: "ALL",
+        pill_1: "CAMPAIGNS",
+        pill_2: "BEAUTY",
+        pill_3: "MAKEUP",
+        pill_4: "HAIR",
+        pill_5: "LIFESTYLE",
+        brands_eyebrow: "SELECTED PARTNER BRANDS",
+        brands_title: "Selected partner brands",
+        brands_subtitle: "A curated selection of brands Mayra has worked with.",
+        srv_eyebrow: "SERVICES",
+        srv_title: "How brands work with Mayra",
+        srv_1_t: "TikTok and Instagram Reels",
+        srv_1_d: "Short-form video built around a clear product message and engaging storytelling.",
+        srv_2_t: "Instagram Stories",
+        srv_2_d: "Sequenced storytelling combining product demonstration, personal experience, and a clear call to action.",
+        srv_3_t: "UGC Content",
+        srv_3_d: "Content created for the brand to use across its own social channels and paid media.",
+        srv_4_t: "Tutorials, demos, reviews & unboxings",
+        srv_4_d: "Educational formats showing how a product works, performs, and fits into real routines.",
+        srv_5_t: "Event coverage",
+        srv_5_d: "Live content capture and same-day storytelling from brand events and experiences.",
+        srv_6_t: "Campaigns & ambassador partnerships",
+        srv_6_d: "Multi-deliverable campaigns and long-term partnerships built around consistent brand representation.",
+        srv_note: "Usage rights, paid media, whitelisting, exclusivity, and raw footage are quoted separately.",
+        cnt_eyebrow: "CONTACT",
+        cnt_title: "Let's create something impactful.",
+        cnt_subtitle: "Share a few details about your brand and campaign and Mayra will reply with relevant formats, availability, and a tailored proposal.",
+        cnt_socials: "SOCIAL MEDIA",
+        cnt_location_note: "Brazil · Mozambique · Angola · Beauty content that educates, connects, and drives action",
+        cnt_lbl_name: "Name",
+        cnt_lbl_company: "Company",
+        cnt_lbl_email: "Email",
+        cnt_lbl_goal: "Campaign objective",
+        cnt_opt_goal_0: "Select an objective",
+        cnt_opt_goal_1: "Product launch",
+        cnt_opt_goal_2: "Brand awareness",
+        cnt_opt_goal_3: "UGC content / Paid media",
+        cnt_opt_goal_4: "Event coverage",
+        cnt_opt_goal_5: "Ambassador partnership",
+        cnt_lbl_timeline: "Timeline",
+        cnt_opt_time_0: "Select a timeline",
+        cnt_opt_time_1: "Immediate (within 2 weeks)",
+        cnt_opt_time_2: "This month",
+        cnt_opt_time_3: "Next quarter",
+        cnt_opt_time_4: "Flexible",
+        cnt_lbl_message: "Message",
+        cnt_feedback: "Thank you for reaching out! Your campaign details have been received and Mayra will reply shortly.",
+        footer_copy: "© 2026 Mayra Cremildo. All rights reserved.",
+        mk_desc: "Consolidated organic reach metrics, audience demographics, and cross-platform deliverables.",
+        mk_download_btn: "Download Summary (.TXT)",
+        mk_print_btn: "Print / Save PDF",
+        badge_campaign: "CAMPAIGN",
+        btn_close: "Close",
+        btn_view_content: "View content",
+        stat_views: "Views",
+        stat_likes: "Likes",
+        stat_comments: "Comments",
+        stat_shares: "Shares",
+        stat_saves: "Saves",
+        no_link_notice: "Video link not added yet — paste the URL into videoUrl in the code."
+      }
+    };
+
+    const portfolioItems = [
+      {
+        id: 1,
+        brand: "MAQUILHAGEM",
+        brandEn: "MAKEUP",
+        titlePt: "Aplicação e acabamento natural",
+        titleEn: "Natural application & seamless finish",
+        category: "maquiagem",
+        categoryLabelPt: "Maquilhagem",
+        categoryLabelEn: "Makeup",
+        isCampaign: false,
+        platforms: "TikTok · Instagram",
+        date: "2026-04-14",
+        views: "494K",
+        likes: "48.3K",
+        comments: "312",
+        shares: "1.9K",
+        saves: "6.4K",
+        descPt: "Demonstração prática de técnica de aplicação e esfumado para um acabamento luminoso e duradouro no dia a dia.",
+        descEn: "Practical application and blending technique demonstration for a luminous, long-lasting everyday finish.",
+        image: "https://images.pexels.com/videos/6944163/pexels-photo-6944163.jpeg?auto=compress&cs=tinysrgb&w=800",
+        videoUrl: "https://videos.pexels.com/video-files/6944163/6944163-uhd_1440_2560_25fps.mp4",
+        videoFallbackUrl: "https://videos.pexels.com/video-files/6944163/6944163-hd_1080_1920_25fps.mp4",
+        pexelsPageUrl: "https://www.pexels.com/pt-br/video/aplicando-solicitando-praticando-encantador-6944163/"
+      },
+      {
+        id: 2,
+        brand: "BELEZA",
+        brandEn: "BEAUTY",
+        titlePt: "Texturas, luminosidade e cuidado da pele",
+        titleEn: "Textures, glow & skincare ritual",
+        category: "beleza",
+        categoryLabelPt: "Beleza",
+        categoryLabelEn: "Beauty",
+        isCampaign: false,
+        platforms: "TikTok · Instagram",
+        date: "2026-04-02",
+        views: "188K",
+        likes: "16.4K",
+        comments: "194",
+        shares: "820",
+        saves: "4.1K",
+        descPt: "Narrativa visual focada em textura sensorial, hidratação profunda e resultados visíveis na rotina de cuidados de pele.",
+        descEn: "Visual storytelling centered on sensory texture, deep hydration, and visible skincare routine results.",
+        image: "https://images.pexels.com/videos/19884161/pexels-photo-19884161.jpeg?auto=compress&cs=tinysrgb&w=800",
+        videoUrl: "https://videos.pexels.com/video-files/19884161/19884161-uhd_1440_2560_30fps.mp4",
+        videoFallbackUrl: "https://videos.pexels.com/video-files/19884161/19884161-hd_1080_1920_30fps.mp4",
+        pexelsPageUrl: "https://www.pexels.com/pt-br/video/abstrato-resumo-abstrair-arte-19884161/"
+      },
+      {
+        id: 3,
+        brand: "CABELO",
+        brandEn: "HAIR",
+        titlePt: "Definição, movimento e cuidado capilar",
+        titleEn: "Definition, movement & hair care",
+        category: "cabelo",
+        categoryLabelPt: "Cabelo",
+        categoryLabelEn: "Hair",
+        isCampaign: false,
+        platforms: "TikTok · Instagram",
+        date: "2026-03-25",
+        views: "267.8K",
+        likes: "24.9K",
+        comments: "176",
+        shares: "945",
+        saves: "5.2K",
+        descPt: "Conteúdo editorial destacando definição, nutrição e brilho natural com técnicas acessíveis para fios texturizados.",
+        descEn: "Editorial content highlighting curl definition, nourishment, and natural shine with accessible techniques for textured hair.",
+        image: "https://images.pexels.com/videos/6660563/pexels-photo-6660563.jpeg?auto=compress&cs=tinysrgb&w=800",
+        videoUrl: "https://videos.pexels.com/video-files/6660563/6660563-uhd_1440_2560_25fps.mp4",
+        videoFallbackUrl: "https://videos.pexels.com/video-files/6660563/6660563-hd_1080_1920_25fps.mp4",
+        pexelsPageUrl: "https://www.pexels.com/pt-br/video/artistico-cultural-caprichado-atraente-6660563/"
+      },
+      {
+        id: 4,
+        brand: "LIFESTYLE",
+        brandEn: "LIFESTYLE",
+        titlePt: "Rotina leve, viagens e momentos ao ar livre",
+        titleEn: "Slow routine, travel & outdoor moments",
+        category: "lifestyle",
+        categoryLabelPt: "Lifestyle",
+        categoryLabelEn: "Lifestyle",
+        isCampaign: false,
+        platforms: "TikTok · Instagram",
+        date: "2026-03-14",
+        views: "304.7K",
+        likes: "29.1K",
+        comments: "162",
+        shares: "630",
+        saves: "1.9K",
+        descPt: "Storytelling visual autêntico acompanhando deslocações, paisagens e experiências de lifestyle que geram identificação imediata.",
+        descEn: "Authentic visual storytelling capturing travel, landscapes, and lifestyle moments that spark immediate audience connection.",
+        image: "https://images.pexels.com/videos/37595367/pexels-photo-37595367.jpeg?auto=compress&cs=tinysrgb&w=800",
+        videoUrl: "https://videos.pexels.com/video-files/37595367/37595367-uhd_1440_2560_30fps.mp4",
+        videoFallbackUrl: "https://videos.pexels.com/video-files/37595367/37595367-hd_1080_1920_30fps.mp4",
+        pexelsPageUrl: "https://www.pexels.com/pt-br/video/vista-serena-da-montanha-sugarloaf-a-partir-da-balsa-37595367/"
+      },
+      {
+        id: 5,
+        brand: "CAMPANHA",
+        brandEn: "CAMPAIGN",
+        titlePt: "Apresentação de produto e storytelling de marca",
+        titleEn: "Product showcase & brand storytelling",
+        category: "campanhas",
+        categoryLabelPt: "Campanhas",
+        categoryLabelEn: "Campaigns",
+        isCampaign: true,
+        platforms: "Instagram · TikTok",
+        date: "2026-03-04",
+        views: "420.1K",
+        likes: "35.8K",
+        comments: "240",
+        shares: "1.1K",
+        saves: "2.8K",
+        descPt: "Formato comercial orientado à conversão, evidenciando embalagem, textura e benefícios reais do produto em uso.",
+        descEn: "Conversion-driven commercial format highlighting packaging, texture, and real product benefits in action.",
+        image: "https://images.pexels.com/videos/6801295/pexels-photo-6801295.jpeg?auto=compress&cs=tinysrgb&w=800",
+        videoUrl: "https://videos.pexels.com/video-files/6801295/6801295-uhd_1440_2560_25fps.mp4",
+        videoFallbackUrl: "https://videos.pexels.com/video-files/6801295/6801295-hd_1080_1920_25fps.mp4",
+        pexelsPageUrl: "https://www.pexels.com/pt-br/video/maos-segurando-holding-mostrando-6801295/"
+      }
+    ];
+
+    let currentLang = 'pt';
+    let currentFilter = 'todos';
+    let selectedWorkId = null;
+    let currentPreviewItem = null;
+
+    function animateCounter(el) {
+      if (el.dataset.animated === 'true') return;
+      el.dataset.animated = 'true';
+
+      const target = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1350;
+      const start = performance.now();
+
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = target * eased;
+        el.textContent = value.toFixed(decimals) + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = target.toFixed(decimals) + suffix;
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    function initObservers() {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          el.classList.add('in-view');
+
+          el.querySelectorAll('[data-count]').forEach(animateCounter);
+          el.querySelectorAll('.bar-fill[data-width]').forEach(bar => {
+            bar.style.width = bar.dataset.width;
+          });
+          const donut = el.querySelector('#genderDonutFill');
+          if (donut) {
+            donut.style.strokeDashoffset = donut.dataset.targetOffset;
+          }
+
+          revealObserver.unobserve(el);
+        });
+      }, { threshold: 0.14 });
+
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+      document.querySelectorAll('.in-view [data-count]').forEach(animateCounter);
+    }
+
+    function handleScroll() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+      const progressBar = document.getElementById('scrollProgress');
+      if (progressBar) progressBar.style.width = progress + '%';
+
+      const header = document.getElementById('siteHeader');
+      if (header) header.classList.toggle('scrolled', scrollTop > 20);
+
+      const sections = ['sobre', 'audiencia', 'trabalhos', 'servicos', 'contacto'];
+      let currentId = '';
+      for (const id of sections) {
+        const sec = document.getElementById(id);
+        if (sec && scrollTop >= sec.offsetTop - 160) {
+          currentId = id;
+        }
+      }
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        const href = link.getAttribute('href').replace('#', '');
+        link.classList.toggle('active', href === currentId);
+      });
+    }
+
+    function setLanguage(lang) {
+      if (!translations[lang]) return;
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      document.getElementById('lang-pt').classList.toggle('active', lang === 'pt');
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key] !== undefined) {
+          el.textContent = translations[lang][key];
+        }
+      });
+
+      renderPortfolio(currentFilter);
+      if (currentPreviewItem) {
+        populateWorkPreview(currentPreviewItem);
+      }
+    }
+
+    function previewCardVideo(card, shouldPlay) {
+      const video = card.querySelector('video');
+      if (!video) return;
+      if (shouldPlay) {
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => card.classList.add('is-playing')).catch(() => {});
+        }
+      } else {
+        video.pause();
+        card.classList.remove('is-playing');
+      }
+    }
+
+    function handleVideoSourceError(videoEl, fallbackUrl) {
+      if (fallbackUrl && videoEl.dataset.fallbackUsed !== 'true') {
+        videoEl.dataset.fallbackUsed = 'true';
+        videoEl.src = fallbackUrl;
+        videoEl.load();
+      }
+    }
+
+    function renderPortfolio(category = 'todos') {
+      currentFilter = category;
+      const grid = document.getElementById('portfolioGrid');
+      if (!grid) return;
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-filter') === category);
+      });
+
+      const filtered = category === 'todos'
+        ? portfolioItems
+        : portfolioItems.filter(item => category === 'campanhas' ? item.isCampaign : item.category === category);
+
+      const campaignLabel = translations[currentLang].badge_campaign;
+
+      grid.innerHTML = filtered.map(item => {
+        const title = currentLang === 'pt' ? item.titlePt : item.titleEn;
+        const brandLabel = currentLang === 'pt' ? item.brand : (item.brandEn || item.brand);
+        const selectedClass = selectedWorkId === item.id ? ' selected' : '';
+        return `
+          <article class="work-card${selectedClass}"
+            onmouseenter="previewCardVideo(this, true)"
+            onmouseleave="previewCardVideo(this, false)"
+            ontouchstart="previewCardVideo(this, true)"
+            onclick="openWorkPreview(${item.id})">
+            <div class="work-thumb">
+              <video
+                src="${item.videoUrl}"
+                poster="${item.image}"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                onerror="handleVideoSourceError(this, '${item.videoFallbackUrl}')"
+              ></video>
+              <span class="play-indicator" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="7 4 20 12 7 20 7 4"></polygon>
+                </svg>
+              </span>
+              ${item.isCampaign ? `<span class="campaign-badge">${campaignLabel}</span>` : ''}
+            </div>
+            <div class="work-info">
+              <div class="work-brand">${brandLabel}</div>
+              <h3 class="work-title">${title}</h3>
+              <div class="work-views">${item.views} ${currentLang === 'pt' ? 'visualizações' : 'views'}</div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function openPortfolioCategory(category) {
+      renderPortfolio(category);
+      document.getElementById('backToNichesBtn').classList.add('visible');
+      document.getElementById('trabalhos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function populateWorkPreview(item) {
+      const title = currentLang === 'pt' ? item.titlePt : item.titleEn;
+      const desc = currentLang === 'pt' ? item.descPt : item.descEn;
+      const catLabel = currentLang === 'pt' ? item.categoryLabelPt : item.categoryLabelEn;
+      const brandLabel = currentLang === 'pt' ? item.brand : (item.brandEn || item.brand);
+
+      document.getElementById('workPreviewBrand').textContent = brandLabel;
+      document.getElementById('workPreviewTitle').textContent = title;
+      document.getElementById('workPreviewMeta').textContent = `${catLabel} · ${item.platforms} · ${item.date}`;
+      document.getElementById('workPreviewDesc').textContent = desc;
+
+      document.getElementById('statViews').textContent = item.views;
+      document.getElementById('statLikes').textContent = item.likes;
+      document.getElementById('statComments').textContent = item.comments;
+      document.getElementById('statShares').textContent = item.shares;
+      document.getElementById('statSaves').textContent = item.saves;
+
+      const notice = document.getElementById('noLinkNotice');
+      notice.textContent = translations[currentLang].no_link_notice;
+      notice.classList.remove('visible');
+
+      const mediaContainer = document.getElementById('workPreviewMediaContainer');
+      const url = (item.videoUrl || '').trim();
+      if (url) {
+        mediaContainer.innerHTML = `<video src="${url}" poster="${item.image}" controls autoplay loop playsinline onerror="handleVideoSourceError(this, '${item.videoFallbackUrl}')"></video>`;
+      } else {
+        mediaContainer.innerHTML = `<img src="${item.image}" alt="${title}" />`;
+      }
+    }
+
+    function openWorkPreview(itemId) {
+      const item = portfolioItems.find(w => w.id === itemId);
+      if (!item) return;
+
+      document.querySelectorAll('.work-card').forEach(c => previewCardVideo(c, false));
+
+      selectedWorkId = itemId;
+      currentPreviewItem = item;
+      renderPortfolio(currentFilter);
+      populateWorkPreview(item);
+
+      const overlay = document.getElementById('workPreviewModal');
+      overlay.classList.add('open');
+      overlay.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function stepWorkPreview(direction) {
+      if (!currentPreviewItem) return;
+      const currentIdx = portfolioItems.findIndex(w => w.id === currentPreviewItem.id);
+      const nextIdx = (currentIdx + direction + portfolioItems.length) % portfolioItems.length;
+      openWorkPreview(portfolioItems[nextIdx].id);
+    }
+
+    function openOriginalContentLink() {
+      if (!currentPreviewItem) return;
+      const url = (currentPreviewItem.pexelsPageUrl || currentPreviewItem.videoUrl || '').trim();
+      if (url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      } else {
+        document.getElementById('noLinkNotice').classList.add('visible');
+      }
+    }
+
+    function closeWorkPreview() {
+      document.getElementById('workPreviewMediaContainer').innerHTML = '';
+      currentPreviewItem = null;
+      document.getElementById('workPreviewModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handlePartnershipSubmit(e) {
+      e.preventDefault();
+      document.getElementById('partnershipFeedback').classList.add('visible');
+      e.target.reset();
+    }
+
+    function triggerMediaKitDownload() {
+      const content = [
+        "MEDIA KIT OFICIAL — MAYRA CREMILDO",
+        "Criadora de Beleza, Cabelo e Lifestyle (Brasil · Moçambique · Angola)",
+        "------------------------------------------------------------------",
+        "• Seguidores Combinados: 123.1K (Instagram 53.2K | TikTok 69.9K)",
+        "• Visualizações Mensais: 4.6M+ combinadas",
+        "• Público Principal: Portugal (88.1%), Angola (6.8%), Roménia (3%), Moçambique (1.2%)",
+        "• Género: 77.4% Mulheres | 22.6% Homens",
+        "• Faixa Etária Principal: 18–34 anos (89.1%)",
+        "",
+        "CONTATO COMERCIAL: mayrapartnership@gmail.com"
+      ].join("\n");
+
+      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Media-Kit-Mayra-Cremildo.txt";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      mobileDrawer.classList.toggle('open');
+    });
+    mobileDrawer.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => mobileDrawer.classList.remove('open'));
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target.id === 'mediaKitModal') closeModal('mediaKitModal');
+    });
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal('mediaKitModal');
+        closeWorkPreview();
+      } else if (currentPreviewItem && e.key === 'ArrowRight') {
+        stepWorkPreview(1);
+      } else if (currentPreviewItem && e.key === 'ArrowLeft') {
+        stepWorkPreview(-1);
+      }
+    });
+
+    renderPortfolio('todos');
+    initObservers();
+    handleScroll();
+  </script>
+</body>
+</html>
