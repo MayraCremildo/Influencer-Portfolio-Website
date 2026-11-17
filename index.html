@@ -1697,7 +1697,7 @@
 
           <div class="hero-ctas">
             <a href="#contacto" class="btn-primary" data-i18n="hero_cta_primary">Iniciar uma parceria</a>
-            <button type="button" class="btn-outline" onclick="openModal('mediaKitModal')" data-i18n="hero_cta_secondary">Descarregar media kit</button>
+            <button type="button" class="btn-outline" onclick="downloadMediaKitDesign()" data-i18n="hero_cta_secondary">Descarregar media kit</button>
           </div>
 
           <div class="hero-metrics">
@@ -2295,7 +2295,7 @@
 
   <!-- ==================== MODAL: MEDIA KIT ==================== -->
   <div id="mediaKitModal" class="modal-backdrop" role="dialog" aria-modal="true">
-    <div class="modal-card">
+    <div class="modal-card" style="max-width:560px;">
       <button type="button" class="modal-close-x" onclick="closeModal('mediaKitModal')" aria-label="Fechar">✕</button>
       <span class="eyebrow">MEDIA KIT 2026</span>
       <h3 class="data-card-title">Mayra Cremildo</h3>
@@ -2303,9 +2303,13 @@
         Métricas consolidadas de alcance orgânico, demografia e entregas comerciais multiplataforma.
       </p>
 
+      <div id="mediaKitPreviewBox" style="margin-top:16px; border-radius:14px; overflow:hidden; border:1px solid var(--border-card); background:var(--bg-cream); display:none;">
+        <img id="mediaKitPreviewImg" alt="Pré-visualização do Media Kit" style="width:100%; height:auto; display:block;" />
+      </div>
+
       <div class="mk-stats-grid">
         <div class="mk-stat-box">
-          <div class="mk-stat-num">124.5K</div>
+          <div class="mk-stat-num">123.1K</div>
           <div class="mk-stat-lbl" data-i18n="metric_followers">Seguidores</div>
         </div>
         <div class="mk-stat-box">
@@ -2319,11 +2323,11 @@
       </div>
 
       <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;">
-        <button type="button" class="btn-primary" onclick="triggerMediaKitDownload()" data-i18n="mk_download_btn">
-          Descarregar Resumo (.TXT)
+        <button type="button" class="btn-primary" onclick="downloadMediaKitDesign()" data-i18n="mk_download_btn">
+          Descarregar Media Kit (Design PNG)
         </button>
-        <button type="button" class="btn-outline" onclick="window.print()" data-i18n="mk_print_btn">
-          Imprimir / Salvar PDF
+        <button type="button" class="btn-outline" onclick="printMediaKitEditorial()" data-i18n="mk_print_btn">
+          Salvar em PDF
         </button>
       </div>
     </div>
@@ -2487,8 +2491,8 @@
         cnt_feedback: "Obrigada pelo contacto! Os detalhes da sua campanha foram recebidos e a Mayra responderá em breve.",
         footer_copy: "© 2026 Mayra Cremildo. Todos os direitos reservados.",
         mk_desc: "Métricas consolidadas de alcance orgânico, demografia e entregas comerciais multiplataforma.",
-        mk_download_btn: "Descarregar Resumo (.TXT)",
-        mk_print_btn: "Imprimir / Salvar PDF",
+        mk_download_btn: "Descarregar Media Kit (Design PNG)",
+        mk_print_btn: "Salvar em PDF",
         badge_campaign: "CAMPANHA",
         btn_close: "Fechar",
         btn_view_content: "Ver conteúdo",
@@ -2602,8 +2606,8 @@
         cnt_feedback: "Thank you for reaching out! Your campaign details have been received and Mayra will reply shortly.",
         footer_copy: "© 2026 Mayra Cremildo. All rights reserved.",
         mk_desc: "Consolidated organic reach metrics, audience demographics, and cross-platform deliverables.",
-        mk_download_btn: "Download Summary (.TXT)",
-        mk_print_btn: "Print / Save PDF",
+        mk_download_btn: "Download Media Kit (Design PNG)",
+        mk_print_btn: "Save as PDF",
         badge_campaign: "CAMPAIGN",
         btn_close: "Close",
         btn_view_content: "View content",
@@ -2615,6 +2619,398 @@
         no_link_notice: "Video link not added yet — paste the URL into videoUrl in the code."
       }
     };
+
+    function roundRectPath(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
+    function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
+      const words = text.split(' ');
+      let line = '';
+      let currentY = y;
+      for (let i = 0; i < words.length; i++) {
+        const testLine = line + words[i] + ' ';
+        if (ctx.measureText(testLine).width > maxWidth && i > 0) {
+          ctx.fillText(line.trim(), x, currentY);
+          line = words[i] + ' ';
+          currentY += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line.trim(), x, currentY);
+      return currentY;
+    }
+
+    function loadCorsImage(url) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+        img.src = url + (url.includes('?') ? '&' : '?') + 'auto=compress&cs=tinysrgb&w=900';
+      });
+    }
+
+    async function buildMediaKitCanvas() {
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+
+      const isPt = currentLang === 'pt';
+      const W = 1240;
+      const H = 1754; // Proporção editorial A4 em alta definição
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+
+      // Fundo creme editorial
+      ctx.fillStyle = '#F5F2ED';
+      ctx.fillRect(0, 0, W, H);
+
+      // Faixa superior caramelo
+      ctx.fillStyle = '#785B45';
+      ctx.fillRect(0, 0, W, 14);
+
+      // Cabeçalho do Media Kit
+      ctx.fillStyle = '#845943';
+      ctx.font = '600 16px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(isPt ? 'MEDIA KIT OFICIAL · 2026' : 'OFFICIAL MEDIA KIT · 2026', 76, 86);
+
+      ctx.fillStyle = '#2A1E17';
+      ctx.font = '500 66px "Cormorant Garamond", Georgia, serif';
+      ctx.fillText('Mayra Cremildo', 76, 152);
+
+      ctx.fillStyle = '#5C4E44';
+      ctx.font = '400 21px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(
+        isPt
+          ? 'Criadora de Beleza, Cabelo & Lifestyle · Brasil · Moçambique · Angola'
+          : 'Beauty, Hair & Lifestyle Creator · Brazil · Mozambique · Angola',
+        76,
+        192
+      );
+
+      // Linha divisória
+      ctx.strokeStyle = '#E2DCD2';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(76, 224);
+      ctx.lineTo(W - 76, 224);
+      ctx.stroke();
+
+      // Bloco Retrato Editorial + Bio
+      const photoX = 76;
+      const photoY = 258;
+      const photoW = 360;
+      const photoH = 420;
+
+      roundRectPath(ctx, photoX, photoY, photoW, photoH, 20);
+      ctx.fillStyle = '#785B45';
+      ctx.fill();
+
+      const portrait = await loadCorsImage('https://images.pexels.com/photos/38721813/pexels-photo-38721813.jpeg');
+      if (portrait) {
+        ctx.save();
+        roundRectPath(ctx, photoX, photoY, photoW, photoH, 20);
+        ctx.clip();
+        const scale = Math.max(photoW / portrait.width, photoH / portrait.height);
+        const drawW = portrait.width * scale;
+        const drawH = portrait.height * scale;
+        ctx.drawImage(portrait, photoX + (photoW - drawW) / 2, photoY, drawW, drawH);
+        ctx.restore();
+      }
+
+      // Coluna direita do topo: Bio + Métricas principais
+      const rightX = 474;
+      const rightW = W - 76 - rightX;
+
+      ctx.fillStyle = '#845943';
+      ctx.font = '600 14px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(isPt ? 'SOBRE A CRIADORA' : 'ABOUT THE CREATOR', rightX, 282);
+
+      ctx.fillStyle = '#2A1E17';
+      ctx.font = '400 32px "Cormorant Garamond", Georgia, serif';
+      const leadText = isPt
+        ? 'Conteúdo de beleza que educa, conecta e leva à ação.'
+        : 'Beauty content that educates, connects, and drives action.';
+      const afterLeadY = wrapCanvasText(ctx, leadText, rightX, 324, rightW, 38);
+
+      ctx.fillStyle = '#5C4E44';
+      ctx.font = '400 17.5px "Plus Jakarta Sans", sans-serif';
+      const bioText = isPt
+        ? 'Com formação em Gestão de Marketing e a criar conteúdo desde 2019, Mayra liga marcas a uma audiência feminina de língua portuguesa em Portugal, Angola, Moçambique e Brasil, unindo estética editorial e storytelling prático sobre pele, cabelo 4C, maquilhagem e lifestyle.'
+        : 'With a background in Marketing Management and creating since 2019, Mayra connects brands with a Portuguese-speaking female audience across Portugal, Angola, Mozambique and Brazil, blending editorial aesthetics with practical storytelling on skincare, 4C hair, makeup and lifestyle.';
+      wrapCanvasText(ctx, bioText, rightX, afterLeadY + 34, rightW, 27);
+
+      // 3 Cartões de destaque logo abaixo da bio
+      const kpiY = 548;
+      const kpiGap = 16;
+      const kpiW = (rightW - kpiGap * 2) / 3;
+      const kpiH = 130;
+      const kpis = [
+        { val: '123.1K', lbl: isPt ? 'Seguidores combinados' : 'Combined followers' },
+        { val: '4.6M+', lbl: isPt ? 'Visualizações mensais' : 'Monthly views' },
+        { val: '77.4%', lbl: isPt ? 'Público feminino' : 'Female audience' }
+      ];
+
+      kpis.forEach((item, idx) => {
+        const cx = rightX + idx * (kpiW + kpiGap);
+        roundRectPath(ctx, cx, kpiY, kpiW, kpiH, 16);
+        ctx.fillStyle = '#FAF8F5';
+        ctx.fill();
+        ctx.strokeStyle = '#E5DFD5';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.fillStyle = '#2A1E17';
+        ctx.font = '500 40px "Cormorant Garamond", Georgia, serif';
+        ctx.fillText(item.val, cx + 20, kpiY + 62);
+
+        ctx.fillStyle = '#5C4E44';
+        ctx.font = '400 14px "Plus Jakarta Sans", sans-serif';
+        wrapCanvasText(ctx, item.lbl, cx + 20, kpiY + 92, kpiW - 32, 18);
+      });
+
+      // Secção: Desempenho por Plataforma (2 colunas)
+      const platY = 720;
+      ctx.fillStyle = '#845943';
+      ctx.font = '600 14px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(isPt ? 'DESEMPENHO VERIFICADO POR PLATAFORMA' : 'VERIFIED PLATFORM PERFORMANCE', 76, platY);
+
+      const boxW = (W - 152 - 24) / 2;
+      const boxH = 310;
+      const boxY = platY + 22;
+
+      const platforms = [
+        {
+          name: 'Instagram',
+          period: isPt ? 'ÚLTIMOS 30 DIAS · OUTUBRO 2026' : 'LAST 30 DAYS · OCTOBER 2026',
+          metrics: [
+            { l: isPt ? 'Seguidores' : 'Followers', v: '53.2K' },
+            { l: isPt ? 'Visualizações' : 'Views', v: '1.2M' },
+            { l: isPt ? 'Espetadores' : 'Viewers', v: '250.5K' },
+            { l: isPt ? 'Interações' : 'Interactions', v: '82.7K' }
+          ]
+        },
+        {
+          name: 'TikTok',
+          period: isPt ? 'ÚLTIMOS 28 DIAS · OUTUBRO 2026' : 'LAST 28 DAYS · OCTOBER 2026',
+          metrics: [
+            { l: isPt ? 'Seguidores' : 'Followers', v: '69.9K' },
+            { l: isPt ? 'Visualizações de vídeo' : 'Video views', v: '3.4M' },
+            { l: isPt ? 'Espetadores' : 'Viewers', v: '928K' },
+            { l: isPt ? 'Gostos' : 'Likes', v: '100.9K' }
+          ]
+        }
+      ];
+
+      platforms.forEach((p, i) => {
+        const bx = 76 + i * (boxW + 24);
+        roundRectPath(ctx, bx, boxY, boxW, boxH, 18);
+        ctx.fillStyle = '#FAF8F5';
+        ctx.fill();
+        ctx.strokeStyle = '#E5DFD5';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.fillStyle = '#2A1E17';
+        ctx.font = '400 34px "Cormorant Garamond", Georgia, serif';
+        ctx.fillText(p.name, bx + 28, boxY + 48);
+
+        ctx.fillStyle = '#85766B';
+        ctx.font = '600 12px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText(p.period, bx + 28, boxY + 74);
+
+        p.metrics.forEach((m, mi) => {
+          const col = mi % 2;
+          const row = Math.floor(mi / 2);
+          const mx = bx + 28 + col * 245;
+          const my = boxY + 122 + row * 94;
+
+          ctx.fillStyle = '#5C4E44';
+          ctx.font = '400 14.5px "Plus Jakarta Sans", sans-serif';
+          ctx.fillText(m.l, mx, my);
+
+          ctx.fillStyle = '#2A1E17';
+          ctx.font = '500 38px "Cormorant Garamond", Georgia, serif';
+          ctx.fillText(m.v, mx, my + 40);
+        });
+      });
+
+      // Secção: Audiência & Demografia (3 colunas)
+      const demoY = 1094;
+      ctx.fillStyle = '#845943';
+      ctx.font = '600 14px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(isPt ? 'DEMOGRAFIA DA AUDIÊNCIA' : 'AUDIENCE DEMOGRAPHICS', 76, demoY);
+
+      const dBoxW = (W - 152 - 40) / 3;
+      const dBoxH = 290;
+      const dBoxY = demoY + 22;
+
+      const demoCards = [
+        {
+          title: isPt ? 'Género' : 'Gender',
+          rows: [
+            { label: isPt ? 'Mulheres' : 'Women', pct: 77.4 },
+            { label: isPt ? 'Homens' : 'Men', pct: 22.6 }
+          ]
+        },
+        {
+          title: isPt ? 'Faixa Etária' : 'Age Range',
+          rows: [
+            { label: '25–34', pct: 47.4 },
+            { label: '18–24', pct: 41.7 },
+            { label: '35–44', pct: 6.0 }
+          ]
+        },
+        {
+          title: isPt ? 'Principais Países' : 'Top Countries',
+          rows: [
+            { label: 'Portugal', pct: 88.1 },
+            { label: 'Angola', pct: 6.8 },
+            { label: isPt ? 'Moçambique' : 'Mozambique', pct: 1.2 }
+          ]
+        }
+      ];
+
+      demoCards.forEach((dc, idx) => {
+        const dx = 76 + idx * (dBoxW + 20);
+        roundRectPath(ctx, dx, dBoxY, dBoxW, dBoxH, 18);
+        ctx.fillStyle = '#FAF8F5';
+        ctx.fill();
+        ctx.strokeStyle = '#E5DFD5';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.fillStyle = '#2A1E17';
+        ctx.font = '400 30px "Cormorant Garamond", Georgia, serif';
+        ctx.fillText(dc.title, dx + 24, dBoxY + 46);
+
+        dc.rows.forEach((r, ri) => {
+          const ry = dBoxY + 96 + ri * 62;
+          ctx.fillStyle = '#2A1E17';
+          ctx.font = '400 15.5px "Plus Jakarta Sans", sans-serif';
+          ctx.fillText(r.label, dx + 24, ry);
+
+          const pctStr = r.pct + '%';
+          const pctW = ctx.measureText(pctStr).width;
+          ctx.fillStyle = '#5C4E44';
+          ctx.fillText(pctStr, dx + dBoxW - 24 - pctW, ry);
+
+          // Barra de progresso
+          const trackW = dBoxW - 48;
+          roundRectPath(ctx, dx + 24, ry + 11, trackW, 9, 4.5);
+          ctx.fillStyle = '#EDE8E0';
+          ctx.fill();
+
+          const fillW = Math.max(12, (trackW * r.pct) / 100);
+          roundRectPath(ctx, dx + 24, ry + 11, fillW, 9, 4.5);
+          ctx.fillStyle = '#845943';
+          ctx.fill();
+        });
+      });
+
+      // Nichos & Marcas Parceiras
+      const brandY = 1446;
+      ctx.fillStyle = '#845943';
+      ctx.font = '600 13px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(
+        isPt
+          ? 'NICHOS: CAMPANHAS · BELEZA · MAQUILHAGEM · CABELO · LIFESTYLE'
+          : 'NICHES: CAMPAIGNS · BEAUTY · MAKEUP · HAIR · LIFESTYLE',
+        76,
+        brandY
+      );
+
+      ctx.fillStyle = '#5C4E44';
+      ctx.font = '500 16px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(
+        'SEPHORA · L’ORÉAL · KIKO MILANO · THE BODY SHOP · URIAGE · ERBORIAN · O BOTICÁRIO · RITUALS · PRIMOR · MORPHE',
+        76,
+        brandY + 34
+      );
+
+      // Rodapé escuro elegante com contacto direto
+      const footY = 1536;
+      roundRectPath(ctx, 76, footY, W - 152, 148, 20);
+      ctx.fillStyle = '#2A1E17';
+      ctx.fill();
+
+      ctx.fillStyle = '#E5DFD5';
+      ctx.font = '600 13px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(isPt ? 'PARCERIAS & CAMPANHAS' : 'PARTNERSHIPS & CAMPAIGNS', 112, footY + 46);
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '400 36px "Cormorant Garamond", Georgia, serif';
+      ctx.fillText('mayrapartnership@gmail.com', 112, footY + 94);
+
+      ctx.fillStyle = '#D6CCC0';
+      ctx.font = '400 16px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Instagram & TikTok: @mayracremildo', 112, footY + 124);
+
+      return canvas;
+    }
+
+    async function downloadMediaKitDesign() {
+      const canvas = await buildMediaKitCanvas();
+      const dataUrl = canvas.toDataURL('image/png');
+
+      // Atualiza pré-visualização no modal caso esteja aberto
+      const previewBox = document.getElementById('mediaKitPreviewBox');
+      const previewImg = document.getElementById('mediaKitPreviewImg');
+      if (previewBox && previewImg) {
+        previewImg.src = dataUrl;
+        previewBox.style.display = 'block';
+      }
+
+      const link = document.createElement('a');
+      link.download = currentLang === 'pt'
+        ? 'Media-Kit-Mayra-Cremildo-2026.png'
+        : 'Media-Kit-Mayra-Cremildo-2026-EN.png';
+      link.href = dataUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    async function printMediaKitEditorial() {
+      const canvas = await buildMediaKitCanvas();
+      const dataUrl = canvas.toDataURL('image/png');
+      const printWin = window.open('', '_blank');
+      if (!printWin) {
+        downloadMediaKitDesign();
+        return;
+      }
+      printWin.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Media Kit — Mayra Cremildo</title>
+          <style>
+            @page { size: A4 portrait; margin: 0; }
+            body { margin: 0; background: #F5F2ED; display: flex; justify-content: center; }
+            img { width: 100%; max-width: 210mm; height: auto; display: block; }
+          </style>
+        </head>
+        <body>
+          <img src="${dataUrl}" onload="setTimeout(() => { window.print(); window.close(); }, 250);" />
+        </body>
+        </html>
+      `);
+      printWin.document.close();
+    }
 
     const portfolioItems = [
       {
